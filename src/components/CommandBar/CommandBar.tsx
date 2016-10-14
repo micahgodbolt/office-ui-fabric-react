@@ -122,7 +122,7 @@ export class CommandBar extends React.Component<ICommandBarProps, ICommandBarSta
           </div>
           ] : []) }
         </div>
-      )
+      );
     }
 
     if (renderedFarItems) {
@@ -132,7 +132,7 @@ export class CommandBar extends React.Component<ICommandBarProps, ICommandBarSta
             this._renderItemInCommandBar(item, index, expandedMenuItemKey, true)
           )) }
         </div>
-      )
+      );
     }
 
     if (contextualMenuItems) {
@@ -146,9 +146,8 @@ export class CommandBar extends React.Component<ICommandBarProps, ICommandBarSta
           isBeakVisible={ true }
           directionalHint={ DirectionalHint.bottomAutoEdge }
         />
-      )
+      );
     }
-
 
     return (
       <div className={ css('ms-CommandBar', className) } ref='commandBarRegion'>
