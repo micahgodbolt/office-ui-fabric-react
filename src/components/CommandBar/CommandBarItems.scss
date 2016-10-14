@@ -1,0 +1,134 @@
+@import '../../common/common';
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+//
+// Office UI Fabric
+// --------------------------------------------------
+// Command Bar styles
+//
+// Using Padding instead of Margin for ms-CommandBarItem so that width to
+// calculate overFlow items is calculated correctly.
+
+$CommandBarItem-fontSize: 16px;
+$CommandBarItem-chevronDown-fontSize: 12px;
+$CommandBarItem-overflow-fontSize: 18px;
+
+@mixin highContrastBorder($color) {
+    @include border-left(1px, solid, $color);
+    @include border-right(1px, solid, $color);
+}
+
+// Command Bar Item
+.ms-CommandBarItem {
+  color: $ms-color-themePrimary;
+  outline: transparent;
+  padding: 0 4px;
+
+  @media screen and (-ms-high-contrast: active) {
+    @include highContrastBorder($ms-color-black);
+    outline: none;
+  }
+
+  @media screen and (-ms-high-contrast: black-on-white) {
+    @include highContrastBorder($ms-color-white);
+    outline: none;
+  }
+}
+
+.ms-CommandBarItem-chevronDown,
+.ms-CommandBarItem-commandText {
+  padding: 0 4px;
+}
+
+@mixin CommandBarItem-text {
+  @include focus-border(2px);
+  @include ms-font-m;
+  color: $ms-color-neutralPrimary;
+  position: relative;
+  background: none;
+  border: none;
+  min-width: 20px;
+  text-align: center;
+  padding: 0 4px;
+  display: block;
+  height: 100%;
+  &.ms-CommandBarItem--noName {
+    padding: 0 8px;
+  }
+}
+
+.ms-CommandBarItem-text {
+  @include CommandBarItem-text;
+}
+
+.ms-CommandBarItem-link {
+  @include CommandBarItem-text;
+  cursor: pointer;
+
+  &:hover,
+  &.is-expanded {
+    @media screen and (-ms-high-contrast: active) {
+      @include highContrastBorder($ms-color-white);
+    }
+
+    @media screen and (-ms-high-contrast: black-on-white) {
+      @include highContrastBorder($ms-color-black);
+    }
+  }
+
+  &:hover {
+    color: $ms-color-neutralDark;
+    background-color: $ms-color-neutralLight;
+
+    .ms-CommandBarItem-icon {
+      color: $ms-color-themeDark;
+    }
+
+    .ms-CommandBarItem-chevronDown {
+      color: $ms-color-neutralPrimaryAlt;
+    }
+
+    .ms-CommandBarItem-overflow {
+      color: $ms-color-neutralDark;
+    }
+  }
+
+  &.is-expanded {
+    background-color: $ms-color-neutralQuaternaryAlt;
+    color: $ms-color-black;
+
+    .ms-CommandBarItem-icon {
+      color: $ms-color-themeDarker;
+    }
+
+    .ms-CommandBarItem-chevronDown {
+      color: $ms-color-neutralDark;
+    }
+
+    .ms-CommandBarItem-overflow {
+      color: $ms-color-black;
+    }
+  }
+
+  &.is-expanded:hover {
+    background-color: $ms-color-neutralQuaternary;
+  }
+}
+
+.ms-CommandBarItem-icon {
+  font-size: $CommandBarItem-fontSize;
+  color: $ms-color-themeDarkAlt;
+  padding: 0 4px;
+}
+
+.ms-CommandBarItem-chevronDown  {
+  color: $ms-color-neutralSecondary;
+  font-size: $CommandBarItem-chevronDown-fontSize;
+}
+
+.ms-CommandBarItem-overflow {
+  font-size: $CommandBarItem-overflow-fontSize;
+  color: $ms-color-neutralPrimary;
+  padding: 0 7px;
+}

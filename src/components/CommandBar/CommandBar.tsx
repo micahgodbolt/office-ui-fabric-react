@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ICommandBar, ICommandBarProps } from './CommandBar.Props';
 import { FocusZone, FocusZoneDirection } from '../../FocusZone';
+import { SearchBox } from '../../SearchBox';
 import { ContextualMenu, IContextualMenuItem } from '../../ContextualMenu';
 import { EventGroup } from '../../utilities/eventGroup/EventGroup';
 import { DirectionalHint } from '../../common/DirectionalHint';
@@ -9,6 +10,7 @@ import { css } from '../../utilities/css';
 import { getId } from '../../utilities/object';
 import { buttonProperties, divProperties, getNativeProps } from '../../utilities/properties';
 import './CommandBar.scss';
+import './CommandBarItems.scss';
 
 const OVERFLOW_KEY = 'overflow';
 const OVERFLOW_WIDTH = 41.5;
@@ -80,52 +82,62 @@ export class CommandBar extends React.Component<ICommandBarProps, ICommandBarSta
     const { isSearchBoxVisible, searchPlaceholderText, className } = this.props;
     const { renderedItems, contextualMenuItems, expandedMenuItemKey, expandedMenuId, renderedOverflowItems, contextualMenuTarget, renderedFarItems } = this.state;
     let searchBox;
+    let commandNearList;
+    let commandFarList;
+    let contextualMenu;
 
     if (isSearchBoxVisible) {
       searchBox = (
-        <div className='ms-CommandBarSearch' ref='searchSurface'>
-          <input className='ms-CommandBarSearch-input' type='text' placeholder={ searchPlaceholderText } />
-          <div className='ms-CommandBarSearch-iconWrapper ms-CommandBarSearch-iconSearchWrapper'>
-            <i className='ms-Icon ms-Icon--Search'></i>
-          </div>
-          <div className='ms-CommandBarSearch-iconWrapper ms-CommandBarSearch-iconClearWrapper ms-font-s'>
-            <i className='ms-Icon ms-Icon--Cancel'></i>
-          </div>
+        <div className='ms-CommandBar-search'>
+         <SearchBox
+          onChange={
+            (newValue) => {
+              console.log('Search box value changed to: ' + newValue);
+            }
+          }
+          labelText= { searchPlaceholderText }
+         />
         </div>
       );
     }
 
-    return (
-      <div className={ css('ms-CommandBar', className) } ref='commandBarRegion'>
-        { searchBox }
-        <FocusZone ref='focusZone' direction={ FocusZoneDirection.horizontal } rootProps={ { role: 'menubar' } }>
-          <div className='ms-CommandBar-primaryCommands' ref='commandSurface'>
-            { renderedItems.map((item, index) => (
-              this._renderItemInCommandBar(item, index, expandedMenuItemKey)
-            )).concat((renderedOverflowItems && renderedOverflowItems.length) ? [
-            <div className='ms-CommandBarItem' key={ OVERFLOW_KEY } ref={ OVERFLOW_KEY }>
-              <button
-                id={ this._id + OVERFLOW_KEY }
-                className={ css('ms-CommandBarItem-link', { 'is-expanded': (expandedMenuItemKey === OVERFLOW_KEY) }) }
-                onClick={ this._onOverflowClick }
-                role='menuitem'
-                aria-label={ this.props.elipisisAriaLabel || '' }
-                aria-haspopup={ true }
-                data-automation-id='commandBarOverflow'
-              >
-                <i className='ms-CommandBarItem-overflow ms-Icon ms-Icon--More' />
-              </button>
-            </div>
-            ] : []) }
+    if (renderedItems) {
+      commandNearList = (
+        <div className='ms-CommandBar-primaryCommands' ref='commandSurface'>
+          { renderedItems.map((item, index) => (
+            this._renderItemInCommandBar(item, index, expandedMenuItemKey)
+          )).concat((renderedOverflowItems && renderedOverflowItems.length) ? [
+          <div className='ms-CommandBarItem' key={ OVERFLOW_KEY } ref={ OVERFLOW_KEY }>
+            <button
+              id={ this._id + OVERFLOW_KEY }
+              className={ css('ms-CommandBarItem-link', { 'is-expanded': (expandedMenuItemKey === OVERFLOW_KEY) }) }
+              onClick={ this._onOverflowClick }
+              role='menuitem'
+              aria-label={ this.props.elipisisAriaLabel || '' }
+              aria-haspopup={ true }
+              data-automation-id='commandBarOverflow'
+            >
+              <i className='ms-CommandBarItem-overflow ms-Icon ms-Icon--More' />
+            </button>
           </div>
-          <div className='ms-CommandBar-sideCommands' ref='farCommandSurface'>
-            { renderedFarItems.map((item, index) => (
-              this._renderItemInCommandBar(item, index, expandedMenuItemKey, true)
-            )) }
-          </div>
-        </FocusZone>
-        { (contextualMenuItems) ?
-        (<ContextualMenu
+          ] : []) }
+        </div>
+      )
+    }
+
+    if (renderedFarItems) {
+      commandFarList = (
+        <div className='ms-CommandBar-sideCommands' ref='farCommandSurface'>
+          { renderedFarItems.map((item, index) => (
+            this._renderItemInCommandBar(item, index, expandedMenuItemKey, true)
+          )) }
+        </div>
+      )
+    }
+
+    if (contextualMenuItems) {
+      contextualMenu = (
+        <ContextualMenu
           labelElementId={ expandedMenuId }
           className='ms-CommandBar-menuHost'
           items={ contextualMenuItems }
@@ -134,7 +146,18 @@ export class CommandBar extends React.Component<ICommandBarProps, ICommandBarSta
           isBeakVisible={ true }
           directionalHint={ DirectionalHint.bottomAutoEdge }
         />
-        ) : (null)}
+      )
+    }
+
+
+    return (
+      <div className={ css('ms-CommandBar', className) } ref='commandBarRegion'>
+          { searchBox }
+        <FocusZone className='ms-CommandBar-commands' ref='focusZone' direction={ FocusZoneDirection.horizontal } rootProps={ { role: 'menubar' } }>
+          { commandNearList }
+          { commandFarList }
+        </FocusZone>
+        { contextualMenu }
       </div>
     );
   }
