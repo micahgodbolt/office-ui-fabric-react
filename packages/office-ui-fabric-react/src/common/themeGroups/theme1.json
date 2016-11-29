@@ -1,0 +1,14 @@
+{
+  "props": {
+    "buttonbg": {
+      "value": "#000",
+      "category": "background-color",
+      "comment": ""
+    },
+    "buttonfg": {
+      "value": "#fff",
+      "category": "text-color",
+      "comment": ""
+    }
+  }
+}

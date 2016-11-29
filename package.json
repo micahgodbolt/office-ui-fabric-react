@@ -15,6 +15,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@microsoft/npmx": "^1.2.0"
+    "@microsoft/npmx": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "underscore": "^1.8.3",
+    "vinyl-map": "^1.0.1"
   }
 }

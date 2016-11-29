@@ -3,9 +3,13 @@
 let build = require('@microsoft/web-library-build');
 let buildConfig = build.getConfig();
 let gulp = require('gulp');
+let rename = require("gulp-rename");
 let configFile = "./ftpconfig.json";
 let fs = require('fs');
 let path = require('path');
+let map = require('vinyl-map');
+let _ = require('underscore');
+
 
 let isProduction = process.argv.indexOf('--production') >= 0;
 let isNuke = process.argv.indexOf('nuke') >= 0;
@@ -48,6 +52,26 @@ if (isProduction || isNuke) {
     libAMDFolder: path.join(packageFolder, 'lib-amd')
   });
 }
+
+gulp.task('jsonToScss', function () {
+
+  var jsonToScss = map(function (content, filename) {
+    var json = JSON.parse(content.toString());
+    var newContent = _.map(json.props, function (data, key) {
+      return `$${key}: ${data.value};`
+    }).join('\n');
+
+    return new Buffer(newContent);
+  });
+
+  gulp.src('src/common/themeGroups/*.json')
+    .pipe(jsonToScss)
+    .pipe(rename(function (path) {
+      path.extname = ".scss";
+    }))
+    .pipe(gulp.dest('dist'));
+
+});
 
 gulp.task('install-deploy', function (cb) {
   let prompt = require('gulp-prompt');
