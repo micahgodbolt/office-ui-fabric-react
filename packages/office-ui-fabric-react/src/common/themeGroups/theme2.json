@@ -1,17 +1,17 @@
 {
-  "themeName": "Theme 1",
+  "themeName": "Theme 22",
   "usedIn": [
-    "Primary Button"
+    "Normal Button"
   ],
   "props": {
     "foreground": {
-      "value": "#ffffff",
+      "value": "#333333",
       "category": "foreground",
       "type": "color",
       "contrastsTo": "background"
     },
     "background": {
-      "value": "#0078d7",
+      "value": "#f4f4f4",
       "category": "background",
       "type": "color"
     },
@@ -21,32 +21,32 @@
       "type": "color"
     },
     "foregroundHover": {
-      "value": "#ffffff",
+      "value": "#000000",
       "category": "foreground",
       "type": "color"
     },
     "backgroundHover": {
-      "value": "#005a9e",
+      "value": "#eaeaea",
       "category": "background",
       "type": "color"
     },
     "borderHover": {
-      "value": "#005a9e",
+      "value": "#eaeaea",
       "category": "border",
       "type": "color"
     },
     "foregroundFocus": {
-      "value": "#ffffff",
+      "value": "#000000",
       "category": "foreground",
       "type": "color"
     },
     "backgroundFocus": {
-      "value": "#005a9e",
+      "value": "#eaeaea",
       "category": "background",
       "type": "color"
     },
     "borderFocus": {
-      "value": "#0078d7",
+      "value": "#000000",
       "category": "border",
       "type": "color"
     },

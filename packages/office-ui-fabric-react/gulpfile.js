@@ -58,7 +58,7 @@ gulp.task('jsonToScss', function () {
   var jsonToScss = map(function (content, filename) {
     var json = JSON.parse(content.toString());
     var newContent = _.map(json.props, function (data, key) {
-      return `$${key}: ${data.value};`
+      return `$${key}: "[token: ${key} , default: ${data.value}]";`;
     }).join('\n');
 
     return new Buffer(newContent);

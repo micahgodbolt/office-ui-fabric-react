@@ -1,47 +1,59 @@
 {
-  "themeName": "Theme 1",
-  "usedIn": [
-    "Primary Button"
-  ],
+  "themeName": "Theme 3",
+  "usedBy": "Compound Button",
   "props": {
     "foreground": {
-      "value": "#ffffff",
+      "value": "#000000",
       "category": "foreground",
-      "type": "color",
-      "contrastsTo": "background"
+      "type": "color"
+    },
+    "descriptionForeground": {
+      "value": "#666666",
+      "category": "foreground",
+      "type": "color"
     },
     "background": {
-      "value": "#0078d7",
+      "value": "#f4f4f4",
       "category": "background",
       "type": "color"
     },
     "border": {
-      "value": "#0078d7",
+      "value": "#f4f4f4",
       "category": "border",
       "type": "color"
     },
     "foregroundHover": {
-      "value": "#ffffff",
+      "value": "#000000",
+      "category": "foreground",
+      "type": "color"
+    },
+    "descriptionForegroundHover": {
+      "value": "#212121",
       "category": "foreground",
       "type": "color"
     },
     "backgroundHover": {
-      "value": "#005a9e",
+      "value": "#eaeaea",
       "category": "background",
       "type": "color"
     },
     "borderHover": {
-      "value": "#005a9e",
+      "value": "#eaeaea",
       "category": "border",
       "type": "color"
     },
     "foregroundFocus": {
-      "value": "#ffffff",
+      "value": "#333333",
+      "category": "foreground",
+      "type": "color"
+    },
+    "descriptionForegroundFocus": {
+      "value": "#666666",
       "category": "foreground",
       "type": "color"
     },
     "backgroundFocus": {
-      "value": "#005a9e",
+      "value": "#f4f4f4",
       "category": "background",
       "type": "color"
     },
@@ -51,6 +63,11 @@
       "type": "color"
     },
     "foregroundDisabled": {
+      "value": "#a6a6a6",
+      "category": "foreground",
+      "type": "color"
+    },
+    "descriptionForegroundDisabled": {
       "value": "#a6a6a6",
       "category": "foreground",
       "type": "color"
@@ -66,6 +83,11 @@
       "type": "color"
     },
     "foregroundActive": {
+      "value": "#ffffff",
+      "category": "foreground",
+      "type": "color"
+    },
+    "descriptionForegroundActive": {
       "value": "#ffffff",
       "category": "foreground",
       "type": "color"
