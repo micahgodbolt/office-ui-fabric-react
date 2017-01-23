@@ -7,3 +7,5 @@ props:
   callout:
     bg:
       value: "{!white}"
+    border:
+      value: "{!neutralLight}"

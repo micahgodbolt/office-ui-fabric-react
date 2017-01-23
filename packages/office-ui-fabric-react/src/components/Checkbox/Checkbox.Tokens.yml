@@ -1,0 +1,51 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: checkbox
+  type: color
+props:
+  checkbox:
+    focus:
+      border:
+        value: "{!neutralSecondary}"
+    check:
+      default:
+        border:
+          value: "{!neutralTertiary}"
+      disabled:
+        border:
+          value: "{!neutralTertiary}"
+        bg:
+          value: "{!neutralTertiaryAlt}"
+        fg:
+          value: "{!white}"
+      hover:
+        border:
+          value: "{!neutralSecondaryAlt}"
+      focus:
+        border:
+          value: "{!neutralSecondary}"
+      checked:
+        default:
+          border:
+            value: "{!themePrimary}"
+          bg:
+            value: "{!themePrimary}"
+          fg:
+            value: "{!white}"
+        hover:
+          bg:
+            value: "{!themeDarkAlt}"
+    text:
+      default:
+        fg:
+          value: "{!neutralPrimary}"
+      disabled:
+        fg:
+          value: "{!neutralTertiary}"
+      hover:
+        fg:
+          value: "{!black}"
+      checked:
+        border:
+          value: "{!neutralPrimary}"

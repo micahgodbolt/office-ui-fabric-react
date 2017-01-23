@@ -1,4 +1,5 @@
 @import '../../common/common';
+@import './Checkbox.Tokens';
 
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 
@@ -34,18 +35,11 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
 
 .ms-Checkbox {
   box-sizing: border-box;
-  color: $ms-color-neutralPrimary;
   font-family: $ms-font-family-base;
   font-size: $ms-font-size-m;
   font-weight: $ms-font-weight-regular;
   min-height: 36px;
   position: relative;
-
-  .ms-Label {
-    font-size: $ms-font-size-m;
-    @include padding(0, 0, 0, 26px);
-    display: inline-block;
-  }
 }
 
 // The hidden input
@@ -59,7 +53,7 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
 .ms-Checkbox-label::before {
   content: '';
   display: inline-block;
-  border: 2px solid $ms-color-neutralTertiary;
+  border: 2px solid $checkbox-check-default-border;;
   width: $ms-checkbox-label-size;
   height: $ms-checkbox-label-size;
   font-weight: normal;
@@ -80,7 +74,7 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
   background-color: transparent;
   font-size: $ms-font-size-s-plus;
   top: 0;
-  color: $ms-color-white;
+  color: $checkbox-check-disabled-fg;
   line-height: $ms-checkbox-label-size;
   width: $ms-checkbox-label-size;
   text-align: center;
@@ -98,37 +92,44 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
   min-height: $ms-checkbox-label-size;
   line-height: $ms-checkbox-label-size;
 
+  .ms-Label {
+    color: $checkbox-text-default-fg;
+    font-size: $ms-font-size-m;
+    @include padding(0, 0, 0, 26px);
+    display: inline-block;
+  }
+
   &:hover {
     &::before {
-      border-color: $ms-color-neutralSecondaryAlt;
+      border-color: $checkbox-check-hover-border;
     }
 
     .ms-Label {
-      color: $ms-color-black;
+      color: $checkbox-text-hover-fg;
     }
   }
 
   &:focus {
     &::before {
-      border-color: $ms-color-neutralSecondaryAlt;
+      border-color: $checkbox-check-hover-border;
     }
 
     &.is-disabled::before {
-      border-color: $ms-color-neutralTertiaryAlt;
+      border-color: $checkbox-check-disabled-bg;
     }
 
     &.is-checked::before {
-      border-color: $ms-color-themeDarkAlt;
+      border-color: $checkbox-check-checked-hover-bg;
     }
   }
 
   &:active {
     &::before {
-      border-color: $ms-color-neutralSecondaryAlt;
+      border-color: $checkbox-check-hover-border;
     }
 
     .ms-Label {
-      color: $ms-color-black;
+      color: $checkbox-text-hover-fg;
     }
   }
 
@@ -136,8 +137,8 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
   //
   &.is-checked {
     &::before {
-      border: 10px solid $ms-color-themePrimary;
-      background-color: $ms-color-themePrimary;
+      border: 10px solid $checkbox-check-checked-default-border;
+      background-color:  $checkbox-check-checked-default-bg;
 
       @media screen and (-ms-high-contrast: active), (-ms-high-contrast: black-on-white) {
         display: none;
@@ -159,7 +160,7 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
     &:hover,
     &:focus {
       &::before {
-        border-color: $ms-color-themeDarkAlt;
+        border-color: $checkbox-check-checked-hover-bg;
       }
     }
   }
@@ -172,14 +173,14 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
     &:hover,
     &:focus {
       &::before {
-        border-color: $ms-color-neutralTertiaryAlt;
+        border-color: $checkbox-check-disabled-bg;
       }
     }
 
     &::before {
-      background-color: $ms-color-neutralTertiaryAlt;
-      border-color: $ms-color-neutralTertiaryAlt;
-      color: $ms-color-neutralTertiaryAlt;
+      background-color: $checkbox-check-disabled-bg;
+      border-color: $checkbox-check-disabled-bg;
+      color: $checkbox-check-disabled-bg;
     }
 
     &::after {
@@ -188,7 +189,7 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
     }
 
     .ms-Label {
-      color: $ms-color-neutralTertiary;
+      color: $checkbox-check-disabled-border;
 
       @include highContrast-color($ms-color-contrastBlackDisabled, $ms-color-contrastWhiteDisabled);
     }
@@ -198,15 +199,15 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
   //
   &.is-inFocus {
     &::before {
-      border-color: $ms-color-neutralSecondaryAlt;
+      border-color: $checkbox-check-hover-border;
     }
 
     &.is-disabled::before {
-      border-color: $ms-color-neutralTertiaryAlt;
+      border-color: $checkbox-check-disabled-bg;
     }
 
     &.is-checked::before {
-      border-color: $ms-color-themeDarkAlt;
+      border-color: $checkbox-check-checked-hover-bg;
     }
   }
 }
@@ -219,7 +220,7 @@ $ms-checkbox-highContrast-iconBoxSize: 16px;
     bottom: 0px;
     @include right(0px);
     @include left(-8px);
-    border: 1px solid $focusedBorderColor;
+    border: 1px solid $checkbox-focus-border;
     @include highContrast-border($ms-color-white, $ms-color-black, 1px);
   }
 }
