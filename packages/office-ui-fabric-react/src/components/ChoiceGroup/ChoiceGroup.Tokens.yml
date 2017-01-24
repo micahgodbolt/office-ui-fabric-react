@@ -1,0 +1,49 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: choicegroup
+  type: color
+props:
+  choiceGroup:
+    root:
+      focus:
+        border:
+          value: "{!neutralPrimary}"
+    label:
+      default:
+        fg:
+          value: "{!neutralPrimary}"
+      hover:
+        fg:
+          value: "{!black}"
+      disabled:
+        fg:
+          value: "{!neutralTertiary}"
+      checked:
+        fg:
+          value: "{!neutralPrimary}"
+    radio:
+      default:
+        bg:
+          value: "{!themePrimary}"
+        border:
+          value: "{!neutralTertiary}"
+      hover:
+        border:
+          value: "{!neutralSecondaryAlt}"
+      disabled:
+        border:
+          value: "{!neutralTertiaryAlt}"
+        bg:
+          value: "{!neutralTertiaryAlt}"
+      checked:
+        bg:
+          value: "{!themePrimary}"
+        border:
+          value: "{!themePrimary}"
+        hover:
+          border:
+            value: "{!themeDarkAlt}"
+
+
+

@@ -159,16 +159,27 @@ gulp.task('deploy', ['bundle'], function (cb) {
 });
 
 gulp.task('theo', function () {
+
+  // override scss format to remove the kebab-case transformation
+  theo.registerFormat('scss', (json) =>
+    Object.keys(json.props).map(prop =>
+      _.compact([
+        (json.props[prop].comment ? `// ${json.props[prop].comment}` : ''),
+        `$${json.props[prop].name}: ${json.props[prop].value};`
+      ]).join('\n')
+    ).join('\n'));
+
   let gutil = require('gulp-util');
   gulp.src('src/components/**/*.Tokens.yml')
     .pipe(theo.plugins.transform('web', {
       includeRawValue: true,
+      // Preprocess JSON to turn nested props into flat props
       jsonPreProcess: json => {
         let resolveNestedProps = (props, parent = "") => {
           let flatProps = {};
           _.forEach(props, (value, key) => {
             if (typeof value == 'object') {
-              let propName = (parent === "" ? "" : parent + "_") + key
+              let propName = (parent === "" ? "" : parent + "-") + key
               flatProps = Object.assign(flatProps, resolveNestedProps(value, propName))
               if (value.value) {
                 flatProps[propName] = value
@@ -184,6 +195,7 @@ gulp.task('theo', function () {
     .pipe(theo.plugins.format('scss', {
       propsMap: function (prop) {
         var theme;
+        // remove the {! } around raw value so that clean key can be passed through
         if (prop['.rawValue'].startsWith('{!')) {
           theme = prop['.rawValue'].replace(/[{!}]/g, '');
         }
