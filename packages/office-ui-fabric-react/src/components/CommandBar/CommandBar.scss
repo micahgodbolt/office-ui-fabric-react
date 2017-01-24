@@ -1,4 +1,5 @@
 @import '../../common/common';
+@import './CommandBar.Tokens';
 
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 
@@ -43,10 +44,8 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
 
 .ms-CommandBar {
   @include ms-font-m;
-  color: $ms-color-neutralPrimary;
-
   position: relative;
-  background-color: $ms-color-neutralLighter;
+  background-color: $commandBar-root-bg;
   height: $CommandBar-height;
   white-space: nowrap;
   user-select: none;
@@ -72,7 +71,6 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
 // Command Bar Item
 .ms-CommandBarItem {
   display: inline-block;
-  color: $ms-color-themePrimary;
   height: $CommandBarItem-height;
   outline: transparent;
   vertical-align: top;
@@ -101,8 +99,7 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
 @mixin CommandBarItem-text {
   @include focus-border(2px);
   @include ms-font-m;
-  color: $ms-color-neutralPrimary;
-
+  color: $commandBar-item-default-fg;
   position: relative;
   background: none;
   border: none;
@@ -137,50 +134,50 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
     }
   }
 
-  &:hover:not[disabled] {
-    color: $ms-color-neutralDark;
-    background-color: $ms-color-neutralLight;
+  &:hover:not([disabled]) {
+    color: $commandBar-item-hover-fg;
+    background-color: $commandBar-item-hover-bg;
 
     .ms-CommandBarItem-icon {
-      color: $ms-color-themeDark;
+      color: $commandBar-itemIcon-hover-fg;
     }
 
     .ms-CommandBarItem-chevronDown {
-      color: $ms-color-neutralPrimaryAlt;
+      color: $commandBar-itemChevron-hover-fg;
     }
 
     .ms-CommandBarItem-overflow {
-      color: $ms-color-neutralDark;
+      color:$commandBar-item-hover-fg;;
     }
   }
 
   &.is-expanded {
-    background-color: $ms-color-neutralQuaternaryAlt;
-    color: $ms-color-black;
+    background-color: $commandBar-item-isOpen-bg;
+    color: $commandBar-item-isOpen-fg;
 
     .ms-CommandBarItem-icon {
-      color: $ms-color-themeDarker;
+      color: $commandBar-itemIcon-isOpen-fg;
     }
 
     .ms-CommandBarItem-chevronDown {
-      color: $ms-color-neutralDark;
+      color: $commandBar-itemChevron-isOpen-fg;
     }
 
     .ms-CommandBarItem-overflow {
-      color: $ms-color-black;
+      color: $commandBar-item-isOpen-fg;
     }
   }
 
   &.is-expanded:hover {
-    background-color: $ms-color-neutralQuaternary;
+    background-color: $commandBar-item-isOpen-hover-bg;
   }
 
   &[disabled] {
-    color: $ms-color-neutralTertiaryAlt;
+    color: $commandBar-item-disabled-fg;
     cursor: default;
     pointer-events: none;
     .ms-CommandBarItem-icon {
-      color: $ms-color-neutralTertiaryAlt;
+      color: $commandBar-itemIcon-disabled-fg;
     }
   }
 }
@@ -191,17 +188,17 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
 }
 
 .ms-CommandBarItem-iconColor {
-  color: $ms-color-themeDarkAlt;
+  color: $commandBar-itemIcon-default-fg;
 }
 
 .ms-CommandBarItem-chevronDown  {
-  color: $ms-color-neutralSecondary;
+  color: $commandBar-itemChevron-default-fg;
   font-size: $CommandBarItem-chevronDown-fontSize;
 }
 
 .ms-CommandBarItem-overflow {
   font-size: $CommandBarItem-overflow-fontSize;
-  color: $ms-color-neutralPrimary;
+  color: $commandBar-item-default-fg;
   padding: 0 7px;
 }
 
