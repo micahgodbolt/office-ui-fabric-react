@@ -1,0 +1,52 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: contextualMenu
+  type: color
+props:
+  contextualMenu:
+    root:
+      bg:
+        value: "{!white}"
+      border:
+        value: "{!neutralLight}"
+    item:
+      default:
+        fg:
+          value: "{!neutralPrimary}"
+        border:
+          value: "{!neutralLight}"
+      hover:
+        fg:
+          value: "{!black}"
+        bg:
+          value: "{!neutralLighter}"
+      isOpen:
+        bg:
+          value: "{!neutralQuaternaryAlt}"
+        fg:
+          value: "{!black}"
+      disabled:
+        fg:
+          value: "{!neutralTertiaryAlt}"
+    caret:
+      default:
+        fg:
+          value: "{!neutralPrimary}"
+      hover:
+        fg:
+          value: "{!black}"
+    icon:
+      default:
+        fg:
+          value: "{!themePrimary}"
+    header:
+      default:
+        fg:
+          value: "{!themePrimary}"
+    divider:
+      border:
+        value: "{!neutralLight}"
+
+
+

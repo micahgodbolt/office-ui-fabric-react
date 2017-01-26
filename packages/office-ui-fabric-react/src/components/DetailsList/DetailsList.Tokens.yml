@@ -1,0 +1,49 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: detailsList
+  type: color
+props:
+  detailsHeader:
+    root:
+      border:
+        value: "{!neutralLight}"
+    cell:
+      notActionable:
+        fg:
+          value: "{!neutralTertiaryAlt}"
+      default:
+        fg:
+          value: "{!neutralSecondary}"
+      hover:
+        fg:
+          value: "{!neutralPrimary}"
+        bg:
+          value: "{!neutralLighterAlt}"
+      pressed:
+        bg:
+          value: "{!neutralLight}"
+    resizer:
+      bg:
+        value: "{!neutralTertiaryAlt}"
+    icon:
+      default:
+        fg:
+          value: "{!neutralSecondary}"
+      isFilter:
+        fg:
+          value: "{!neutralTertiary}"
+  detailsRow:
+    root:
+      hover:
+        bg:
+          value: "{!neutralLighter}"
+      selected:
+        bg:
+          value: "{!neutralQuaternary}"
+        hover:
+          bg:
+            value: "{!neutralQuaternaryAlt}"
+
+
+
