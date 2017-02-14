@@ -1,6 +1,87 @@
 # Change Log - office-ui-fabric-react
 
-This log was last generated on Fri, 03 Feb 2017 04:10:11 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Feb 2017 04:12:27 GMT and should not be manually modified.
+
+## 1.7.1
+Tue, 14 Feb 2017 04:12:27 GMT
+
+### Patches
+
+- Checkbox: reducing border width to 1px.
+
+## 1.7.0
+Mon, 13 Feb 2017 08:15:53 GMT
+
+### Minor changes
+
+- Changes to Checkbox Props and ChoiceGroup Props to support StrictNullChecks
+
+### Patches
+
+- Updating package.json dependencies to exclude typings packages.
+
+## 1.6.0
+Sat, 11 Feb 2017 04:10:39 GMT
+
+### Minor changes
+
+- ColorPicker: adding `alphaSliderHidden` property to hide the alpha slider.
+
+### Patches
+
+- Breadcrumb: Fixed keyboard activation of items
+- Dropdown: update selectedIndex when options change
+- ChoiceGroup: Adding ability to use Icons
+- Button: Fix various bugs in button styling particularly to do with disabled states.
+- FacePile, Persona: Reverted changes to title attribute from #875
+- Panel: animation no longer styled fixed, which was causing issues downstream with opening it.
+
+## 1.5.5
+Wed, 08 Feb 2017 05:10:53 GMT
+
+### Patches
+
+- Moved all examples from this package into a separate app, so that we can fix imports in the code examples to be the correct imports.
+
+## 1.5.4
+Tue, 07 Feb 2017 20:34:17 GMT
+
+### Patches
+
+- Panel: onDismiss correctly called now before animation starts.
+
+## 1.5.3
+Tue, 07 Feb 2017 01:57:25 GMT
+
+### Patches
+
+- Button: removing vertical-align top which was causing alignment problems.
+
+## 1.5.2
+Sat, 04 Feb 2017 04:05:32 GMT
+
+### Patches
+
+- Image: Now correctly loads SVG images in Edge.
+- Pickers and Popup: Fixed a bug where having a picker in a dialog could cause the dialog to be dismissed on escape press
+
+## 1.5.1
+Sat, 04 Feb 2017 00:27:49 GMT
+
+### Patches
+
+- BaseButton: Resolving an issue where Buttons would not render children.
+
+## 1.5.0
+Fri, 03 Feb 2017 19:02:12 GMT
+
+### Minor changes
+
+- Updated all enums to use explicit numbers
+
+### Patches
+
+- Fixing Facepile imports to be AMD friendly
 
 ## 1.4.0
 Fri, 03 Feb 2017 04:10:11 GMT
