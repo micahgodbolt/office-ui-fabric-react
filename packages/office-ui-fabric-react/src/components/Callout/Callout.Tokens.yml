@@ -1,0 +1,11 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: callout
+  type: color
+props:
+  callout:
+    bg:
+      value: "{!white}"
+    border:
+      value: "{!neutralLight}"

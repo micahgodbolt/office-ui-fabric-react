@@ -1,0 +1,56 @@
+imports:
+  - '../../common/Tokens/GlobalTokens.yml'
+global:
+  category: commandBar
+  type: color
+props:
+  commandBar:
+    root:
+      bg:
+        value: "{!neutralLighter}"
+    item:
+      default:
+        fg:
+          value: "{!neutralPrimary}"
+      hover:
+        fg:
+          value: "{!neutralDark}"
+        bg:
+          value: "{!neutralLight}"
+      focus:
+        bg:
+          value: "{!neutralLight}"
+      disabled:
+        fg:
+          value: "{!neutralTertiaryAlt}"
+      isOpen:
+        fg:
+          value: "{!black}"
+        bg:
+          value: "{!neutralQuaternaryAlt}"
+        hover:
+          bg:
+            value: "{!neutralQuaternary}"
+    itemIcon:
+      default:
+        fg:
+          value: "{!themeDarkAlt}"
+      hover:
+        fg:
+          value: "{!themeDark}"
+      disabled:
+        fg:
+          value: "{!neutralTertiaryAlt}"
+      isOpen:
+        fg:
+          value: "{!themeDarkAlt}"
+    itemChevron:
+      default:
+        fg:
+          value: "{!neutralSecondary}"
+      isOpen:
+        fg:
+          value: "{!neutralDark}"
+      hover:
+        fg:
+          value: "{!neutralPrimaryAlt}"

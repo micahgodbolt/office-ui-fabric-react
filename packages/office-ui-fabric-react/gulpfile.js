@@ -7,6 +7,8 @@ let gulp = require('gulp');
 let configFile = "./ftpconfig.json";
 let fs = require('fs');
 let path = require('path');
+let theo = require('theo');
+let _ = require('underscore');
 
 let isProduction = process.argv.indexOf('--production') >= 0;
 let isNuke = process.argv.indexOf('nuke') >= 0;
@@ -63,3 +65,57 @@ build.task('ts', build.typescript);
 
 // initialize tasks.
 build.initialize(gulp);
+
+gulp.task('theo', function () {
+
+  // override scss format to remove the kebab-case transformation
+  theo.registerFormat('scss', (json) =>
+    Object.keys(json.props).map(prop =>
+      _.compact([
+        (json.props[prop].comment ? `// ${json.props[prop].comment}` : ''),
+        `$${json.props[prop].name}: ${json.props[prop].value};`
+      ]).join('\n')
+    ).join('\n'));
+
+  let gutil = require('gulp-util');
+  gulp.src('src/components/**/*.Tokens.yml')
+    .pipe(theo.plugins.transform('web', {
+      includeRawValue: true,
+      // Preprocess JSON to turn nested props into flat props
+      jsonPreProcess: json => {
+        let resolveNestedProps = (props, parent = "") => {
+          let flatProps = {};
+          _.forEach(props, (value, key) => {
+            if (typeof value == 'object') {
+              let propName = (parent === "" ? "" : parent + "-") + key
+              flatProps = Object.assign(flatProps, resolveNestedProps(value, propName))
+              if (value.value) {
+                flatProps[propName] = value
+              }
+            }
+          })
+          return flatProps;
+        }
+        json.props = resolveNestedProps(json.props);
+        return json;
+      }
+    }))
+    .pipe(theo.plugins.format('scss', {
+      propsMap: function (prop) {
+        var theme;
+        // remove the {! } around raw value so that clean key can be passed through
+        if (prop['.rawValue'].startsWith('{!')) {
+          theme = prop['.rawValue'].replace(/[{!}]/g, '');
+        }
+        else {
+          theme = prop.name;
+          gutil.log(`Gulp: ${prop.name} is missing a theme variable. Do not use raw hex values in component tokens.`);
+        }
+        // Turn on when supporting slot values
+        //prop.value = `"[slot: ${prop.name}, theme: ${theme} default: ${prop.value}]"`;
+        prop.value = `"[theme: ${theme}, default: ${prop.value}]"`;
+        return prop;
+      }
+    }))
+    .pipe(gulp.dest('src/components'));
+});
