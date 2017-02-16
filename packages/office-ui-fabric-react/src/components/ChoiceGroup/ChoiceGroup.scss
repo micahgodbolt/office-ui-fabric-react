@@ -1,4 +1,5 @@
 @import '../../common/common';
+@import './ChoiceGroup.Tokens';
 
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 
@@ -27,7 +28,6 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
 
   .ms-ChoiceField {
     box-sizing: border-box;
-    color: $ms-color-neutralPrimary;
     font-family: $ms-font-family-base;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;
@@ -38,6 +38,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
     @include padding-left(8px);
 
     .ms-Label {
+      color: $choiceGroup-label-default-fg;
       font-size: $ms-font-size-m;
       @include padding(0, 0, 0, 26px);
       display: inline-block;
@@ -55,7 +56,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
   .ms-ChoiceField-field::before {
     content: '';
     display: inline-block;
-    border: 2px solid $ms-color-neutralTertiary;
+    border: 2px solid $choiceGroup-radio-default-border;
     width: $ms-choiceField-field-size;
     height: $ms-choiceField-field-size;
     font-weight: normal;
@@ -103,34 +104,34 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
 
     &:hover {
       &::before {
-        border-color: $ms-color-neutralSecondaryAlt;
+        border-color: $choiceGroup-radio-hover-border;
       }
 
       .ms-Label {
-        color: $ms-color-black;
+        color: $choiceGroup-label-hover-fg;
       }
     }
 
     &:focus {
       &::before {
-        border-color: $ms-color-neutralSecondaryAlt;
+        border-color: $choiceGroup-radio-hover-border;
       }
 
       &.is-disabled::before {
-        border-color: $ms-color-neutralTertiaryAlt;
+        border-color: $choiceGroup-radio-disabled-border;
       }
 
       &.is-checked::before {
-        border-color: $ms-color-themeDarkAlt;
+        border-color: $choiceGroup-radio-checked-hover-border;
       }
     }
     &:active {
       &::before {
-        border-color: $ms-color-neutralSecondaryAlt;
+        border-color: $choiceGroup-radio-hover-border;
       }
 
       .ms-Label {
-        color: $ms-color-black;
+        color: $choiceGroup-label-hover-fg;
       }
     }
 
@@ -138,7 +139,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
     //
     &.is-checked {
       &::before {
-        border: 2px solid $ms-color-themePrimary;
+        border: 2px solid $choiceGroup-radio-checked-bg;
         background-color: transparent;
 
         @media screen and (-ms-high-contrast: active) {
@@ -151,7 +152,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
       }
 
       &::after {
-        background-color: $ms-color-themePrimary;
+        background-color: $choiceGroup-radio-checked-bg;
         top: 5px;
         @include left(5px);
         width: 10px;
@@ -169,7 +170,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
       &:hover,
       &:focus {
         &::before {
-          border-color: $ms-color-themeDarkAlt;
+          border-color: $choiceGroup-radio-checked-hover-border;
         }
       }
     }
@@ -187,9 +188,8 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
       }
 
       &::before {
-        background-color: $ms-color-neutralTertiaryAlt;
-        border-color: $ms-color-neutralTertiaryAlt;
-        color: $ms-color-neutralTertiaryAlt;
+        background-color: $choiceGroup-radio-disabled-border;
+        border-color: $choiceGroup-radio-disabled-bg;
 
         @media screen and (-ms-high-contrast: active) {
           border-color: $ms-color-contrastBlackDisabled;
@@ -201,7 +201,7 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
       }
 
       .ms-Label {
-        color: $ms-color-neutralTertiary;
+        color: $choiceGroup-label-disabled-fg;
 
         @media screen and (-ms-high-contrast: active) {
           color: $ms-color-contrastBlackDisabled;
@@ -217,15 +217,15 @@ $ms-choiceField-transition-timing: cubic-bezier(.4, 0, .23, 1);
     //
     &.is-inFocus {
       &::before {
-        border-color: $ms-color-neutralSecondaryAlt;
+        border-color: $choiceGroup-radio-hover-border;
       }
 
       &.is-disabled::before {
-        border-color: $ms-color-neutralTertiaryAlt;
+        border-color:  $choiceGroup-radio-disabled-bg;
       }
 
       &.is-checked::before {
-        border-color: $ms-color-themeDarkAlt;
+        border-color: $choiceGroup-radio-checked-hover-border;
       }
     }
   }

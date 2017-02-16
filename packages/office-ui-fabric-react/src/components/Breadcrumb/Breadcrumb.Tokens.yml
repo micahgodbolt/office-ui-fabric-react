@@ -12,13 +12,9 @@ props:
       hover:
         bg:
           value: "{!neutralLighterAlt}"
-        fg:
-          value: "{!themeDark}"
       focus:
         fg:
           value: "{!neutralDark}"
-        outline:
-          value: "{!neutralSecondaryAlt}"
       active:
         bg:
           value: "{!neutralTertiaryAlt}"
