@@ -9,6 +9,7 @@ import { IDialogProps, DialogType } from './Dialog.Props';
 import { Overlay } from '../../Overlay';
 import { Layer } from '../../Layer';
 import { Button, ButtonType } from '../../Button';
+import { Panel } from '../../Panel';
 import { DialogFooter } from './DialogFooter';
 import { Popup } from '../Popup/index';
 import { withResponsiveMode, ResponsiveMode } from '../../utilities/decorators/withResponsiveMode';
@@ -101,15 +102,13 @@ export class Dialog extends BaseComponent<IDialogProps, IDialogState> {
       'is-animatingOpen': isAnimatingOpen,
       'is-animatingClose': isAnimatingClose
     });
-    let groupings = this._groupChildren();
 
-    if (subText) {
-      subTextContent = <p className='ms-Dialog-subText' id={ id + '-subText' }>{ subText }</p>;
-    }
+
+
 
     // @temp tuatology - Will adjust this to be a panel at certain breakpoints
-    if (responsiveMode >= ResponsiveMode.small) {
-      return (
+    return (
+      responsiveMode >= ResponsiveMode.medium ?
         <Layer onLayerDidMount={ onLayerMounted || onLayerDidMount }>
           <Popup
             role='dialog'
@@ -128,34 +127,77 @@ export class Dialog extends BaseComponent<IDialogProps, IDialogState> {
                 ignoreExternalFocusing={ ignoreExternalFocusing }
                 forceFocusInsideTrap={ forceFocusInsideTrap }
                 firstFocusableSelector={ firstFocusableSelector }>
-                <div className='ms-Dialog-header'>
-                  <p className='ms-Dialog-title' id={ id + '-title' }>{ title }</p>
-                  <div className='ms-Dialog-topButton'>
-                    { this.props.topButtonsProps.map((props) => (
-                      <Button {...props} />
-                    )) }
-                    <Button
-                      className='ms-Dialog-button ms-Dialog-button--close'
-                      buttonType={ ButtonType.icon }
-                      icon='Cancel'
-                      ariaLabel={ closeButtonAriaLabel }
-                      onClick={ onDismiss }
-                    />
-                  </div>
-                </div>
-                <div className='ms-Dialog-inner'>
-                  <div className={ css('ms-Dialog-content', this.props.contentClassName) }>
-                    { subTextContent }
-                    { groupings.contents }
-                  </div>
-                  { groupings.footers }
-                </div>
+                { this._onRenderContent(this.props) }
               </FocusTrapZone>
             </div>
           </Popup>
         </Layer>
-      );
+        :
+        <Panel
+          className='ms-Dropdown-panel'
+          isOpen={ true }
+          isLightDismiss={ true }
+          onDismiss={ onDismiss }
+          hasCloseButton={ false }
+        >
+          { this._onRenderContent(this.props) }
+        </Panel>
+    );
+  }
+
+  private _onRenderContent(props: IDialogProps): JSX.Element {
+    return (
+      <div>
+        <div className='ms-Dialog-header'>
+          { this._onRenderHeader(this.props) }
+        </div>
+        <div className='ms-Dialog-inner'>
+          { this._onRenderInner(this.props) }
+        </div>
+      </div>
+    )
+  }
+
+  private _onRenderHeader(props: IDialogProps): JSX.Element {
+    let { title, onDismiss, closeButtonAriaLabel } = this.props;
+    let { id } = this.state;
+    return (
+      <div>
+        <p className='ms-Dialog-title' id={ id + '-title' }>{ title }</p>
+        <div className='ms-Dialog-topButton'>
+          { this.props.topButtonsProps.map((props) => (
+            <Button {...props} />
+          )) }
+          <Button
+            className='ms-Dialog-button ms-Dialog-button--close'
+            buttonType={ ButtonType.icon }
+            icon='Cancel'
+            ariaLabel={ closeButtonAriaLabel }
+            onClick={ onDismiss }
+          />
+        </div>
+      </div>
+    );
+  }
+
+  private _onRenderInner(props: IDialogProps): JSX.Element {
+    let { subText } = this.props;
+    let { id } = this.state;
+    let groupings = this._groupChildren();
+    let subTextContent;
+    if (subText) {
+      subTextContent = <p className='ms-Dialog-subText' id={ id + '-subText' }>{ subText }</p>;
     }
+
+    return (
+      <div>
+        <div className={ css('ms-Dialog-content', this.props.contentClassName) }>
+          { subTextContent }
+          { groupings.contents }
+        </div>
+        { groupings.footers }
+      </div>
+    );
   }
 
   // @TODO - typing the footers as an array of DialogFooter is difficult because
