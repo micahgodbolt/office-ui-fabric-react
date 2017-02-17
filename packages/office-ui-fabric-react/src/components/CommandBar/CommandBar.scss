@@ -73,15 +73,13 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
   // Command Bar Item
   .ms-CommandBarItem {
     display: inline-block;
-    color: $ms-color-themePrimary;
     height: $CommandBarItem-height;
     outline: transparent;
     vertical-align: top;
     padding: 0 4px;
 
     &:hover {
-      background-color: $ms-color-neutralLight;
-      color: $ms-color-neutralPrimary;
+      background-color: $commandBar-item-hover-bg;
     }
 
     @media screen and (-ms-high-contrast: active) {
@@ -107,7 +105,7 @@ $SearchBox-sidePadding: 8px; // padding in input on left and right sides without
   @mixin CommandBarItem-text {
     @include focus-border(2px);
     @include ms-font-m;
-     color: $commandBar-item-default-fg;
+    color: $commandBar-item-default-fg;
 
     position: relative;
     background: none;

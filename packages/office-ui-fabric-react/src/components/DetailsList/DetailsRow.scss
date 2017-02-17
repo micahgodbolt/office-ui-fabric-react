@@ -1,10 +1,8 @@
 @import '../../common/common';
+@import './DetailsList.Tokens';
 
 $rowHeight: 36px;
 $rowVerticalPadding: 10px;
-$selectedColor: $ms-color-neutralQuaternary;
-$selectedHoverColor: $ms-color-neutralQuaternaryAlt;
-$unselectedHoverColor: $ms-color-neutralLighter;
 
 :global {
   .ms-DetailsRow {
@@ -26,7 +24,7 @@ $unselectedHoverColor: $ms-color-neutralLighter;
     line-height: $rowHeight - ($rowVerticalPadding * 2);
 
     &.ms-DetailsRow.is-selected {
-      background: $selectedColor;
+      background: $detailsRow-root-selected-bg;
     }
 
     &.is-contentUnselectable {
@@ -36,11 +34,11 @@ $unselectedHoverColor: $ms-color-neutralLighter;
   }
 
   .ms-DetailsRow:hover {
-    background: $unselectedHoverColor;
+    background: $detailsRow-root-hover-bg;
   }
 
   .ms-DetailsRow.is-selected:hover {
-    background: $selectedHoverColor;
+    background: $detailsRow-root-selected-hover-bg;
   }
 
   .ms-DetailsRow-cell {

@@ -1,10 +1,7 @@
 @import '../../common/common';
+@import './DetailsList.Tokens';
 
-$iconForegroundColor: $ms-color-neutralSecondary;
-$actionableHeaderForegroundColor: $ms-color-neutralSecondary;
-$dropdownChevronForegroundColor: $ms-color-neutralTertiary;
 $rowHeight: 36px;
-$resizerColor: $ms-color-neutralTertiaryAlt;
 
 :global {
   .ms-DetailsHeader {
@@ -14,7 +11,7 @@ $resizerColor: $ms-color-neutralTertiaryAlt;
     line-height: $rowHeight;
     white-space: nowrap;
     padding-bottom: 1px;
-    border-bottom: 1px solid $dividerColor;
+    border-bottom: 1px solid $detailsHeader-root-border;
     cursor: default;
     user-select: none;
 
@@ -43,7 +40,7 @@ $resizerColor: $ms-color-neutralTertiaryAlt;
   }
 
   .ms-DetailsHeader-cell {
-    color: $disabledForegroundColor;
+    color: $detailsHeader-cell-notActionable-fg;
 
     @include focus-border();
     font-weight: $ms-font-weight-regular;
@@ -69,15 +66,15 @@ $resizerColor: $ms-color-neutralTertiaryAlt;
     }
 
     &.is-actionable {
-      color: $actionableHeaderForegroundColor;
+      color: $detailsHeader-cell-default-fg;
 
       &:hover {
-        color: $ms-color-neutralPrimary;
-        background: $unselectedHoverBackgroundColor;
+        color: $detailsHeader-cell-hover-fg;
+        background: $detailsHeader-cell-hover-bg;
       }
 
       &:active {
-        background: $unselectedActiveBackgroundColor;
+        background: $detailsHeader-cell-pressed-bg;
       }
     }
 
@@ -104,7 +101,7 @@ $resizerColor: $ms-color-neutralTertiaryAlt;
     top: 0;
     bottom: 0;
     width: 1px;
-    background: $resizerColor;
+    background: $detailsHeader-resizer-bg;
     opacity: 0;
   }
 
@@ -133,12 +130,12 @@ $resizerColor: $ms-color-neutralTertiaryAlt;
   }
 
   .ms-DetailsHeader-cell .ms-Icon {
-    color: $iconForegroundColor;
+    color: $detailsHeader-icon-default-fg;
     opacity: 1;
   }
 
   .ms-DetailsHeader-cell .ms-DetailsHeader-filterChevron.ms-Icon {
-    color: $dropdownChevronForegroundColor;
+    color: $detailsHeader-icon-isFilter-fg;
     @include padding-left(4px);
     vertical-align: middle;
   }

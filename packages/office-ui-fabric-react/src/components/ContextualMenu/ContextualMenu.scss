@@ -1,14 +1,12 @@
 @import '../../common/common';
+@import './ContextualMenu.Tokens';
 
-$ContextualMenu-background: $ms-color-white;
-$ContextualMenu-itemHover: $ms-color-neutralLighter;
-$ContextualMenu-expandedItemBackground: $ms-color-neutralQuaternaryAlt;
 $ContextualMenu-itemHeight: 36px;
 $ContextualMenu-iconWidth: 14px;
 
 :global {
   .ms-ContextualMenu {
-    background-color: $ContextualMenu-background;
+    background-color: $contextualMenu-root-bg;
     min-width: 180px;
   }
 
@@ -21,7 +19,7 @@ $ContextualMenu-iconWidth: 14px;
 
   .ms-ContextualMenu-item {
     @include ms-font-m;
-    color: $ms-color-neutralPrimary;
+    color: $contextualMenu-item-default-fg;
     height: $ContextualMenu-itemHeight;
     position: relative;
     box-sizing: border-box;
@@ -43,26 +41,26 @@ $ContextualMenu-iconWidth: 14px;
     @include text-align(left);
 
     &:hover:not([disabled]) {
-      background: $ContextualMenu-itemHover;
+      background: $contextualMenu-item-hover-bg;
     }
     &.is-disabled,
     &[disabled] {
-      color: $ms-color-neutralTertiaryAlt;
+      color: $contextualMenu-item-disabled-fg;
       cursor: default;
       pointer-events: none;
       .ms-ContextualMenu-icon {
-        color: $ms-color-neutralTertiaryAlt;
+        color: $contextualMenu-item-disabled-fg;
       }
     }
 
-    :global(.is-focusVisible) &:focus {
-      background: $ContextualMenu-itemHover;
+    .is-focusVisible &:focus {
+      background: $contextualMenu-item-hover-bg;
     }
 
     &.is-expanded,
     &.is-expanded:hover {
-      background: $ContextualMenu-expandedItemBackground;
-      color: $ms-color-black;
+      background: $contextualMenu-item-isOpen-bg;
+      color: $contextualMenu-item-isOpen-fg;
       font-weight: $ms-font-weight-semibold;
     }
   }
@@ -71,7 +69,7 @@ $ContextualMenu-iconWidth: 14px;
     @include focus-border();
     @include ms-font-s;
     font-weight: $ms-font-weight-semibold;
-    color: $ms-color-themePrimary;
+    color: $contextualMenu-header-default-fg;
     background: none;
     border: none;
     height: $ContextualMenu-itemHeight;
@@ -104,7 +102,7 @@ $ContextualMenu-iconWidth: 14px;
   .ms-ContextualMenu-divider {
     display: block;
     height: 1px;
-    background-color: $dividerColor;
+    background-color: $contextualMenu-divider-border;
     position: relative;
   }
 
@@ -119,7 +117,7 @@ $ContextualMenu-iconWidth: 14px;
   }
 
   .ms-ContextualMenu-iconColor {
-    color: $ms-color-themePrimary;
+    color: $contextualMenu-icon-default-fg;
   }
 
   .ms-ContextualMenu-itemText {
