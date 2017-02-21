@@ -2,7 +2,8 @@ import * as React from 'react';
 import { css } from '../../Utilities';
 import {
   ISpinnerProps,
-  SpinnerSize
+  SpinnerSize,
+  SpinnerType
 } from './Spinner.Props';
 import './Spinner.scss';
 import styles from './Spinner.scss';
