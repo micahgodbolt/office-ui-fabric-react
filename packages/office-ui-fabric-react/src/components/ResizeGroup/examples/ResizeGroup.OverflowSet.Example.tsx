@@ -9,25 +9,34 @@ import {
 } from '../../OverflowSet';
 import { ResizeGroup } from '../../ResizeGroup';
 
-import { items } from './items';
+import { data } from './items';
+
+interface ResizeOverflowSetProps {
+  items: {
+    overflow: any[];
+    primary: any[];
+  }
+}
+
+class ResizeOverflowSet extends ResizeGroup<ResizeOverflowSetProps> { }
 
 export class ResizeGroupOverflowSetExample extends BaseComponent<any, any> {
 
   public render() {
     return (
-      <ResizeGroup
-        items={ items }
-        onReduceItems={ (currentItems, props) => {
-          let overflow = currentItems[0].overflow.concat(currentItems[0].primary.slice(-1));
-          let primary = currentItems[0].primary.slice(0, -1);
+      <ResizeOverflowSet
+        items={ data }
+        onReduce={ (currentProps, originalProps) => {
+          let overflow = currentProps.overflow.concat(currentProps.primary.slice(-1));
+          let primary = currentProps.primary.slice(0, -1);
 
-          return [{ primary, overflow }];
+          return currentProps;
         } }
-        onRenderItems={ (items) => {
+        onRender={ (items) => {
           return (
             <OverflowSet
-              items={ items[0].primary }
-              overflowItems={ items[0].overflow.length ? items[0].overflow : null }
+              items={ items.primary }
+              overflowItems={ items.overflow.length ? items.overflow : null }
               onRenderItem={ (item) => {
                 return (
                   <DefaultButton

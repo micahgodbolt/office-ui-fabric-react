@@ -6,28 +6,22 @@ import {
 import { IResizeGroupProps } from './ResizeGroup.Props';
 import styles = require('./ResizeGroup.scss');
 
-export interface IResizeGroupState {
-  renderedItems?: any[];
-  measuredItems: any[];
-  shouldMeasure?: boolean;
+export interface IResizeGroupState<T> {
+  props: T;
+  shouldMeasure: boolean;
 }
 
-export interface IOverFlowItemState {
-  [index: number]: any;
-}
-
-export class ResizeGroup extends BaseComponent<IResizeGroupProps, IResizeGroupState> {
+export class ResizeGroup<T> extends BaseComponent<IResizeGroupProps<T>, IResizeGroupState<T>> {
 
   private _root: HTMLElement;
   private _measured: HTMLElement;
 
-  constructor(props: IResizeGroupProps) {
+  constructor(props: IResizeGroupProps<T>) {
     super(props);
     this.state = {
-      shouldMeasure: true,
-      renderedItems: [],
-      measuredItems: this.props.items.concat([]),
-    };
+      props: null,
+      shouldMeasure: true
+    }
   }
 
   public componentDidMount() {
@@ -35,24 +29,25 @@ export class ResizeGroup extends BaseComponent<IResizeGroupProps, IResizeGroupSt
     this._events.on(window, 'resize', this._onResize);
   }
 
-  public render() {
-    let { onRenderItems, onReduceItems, items } = this.props;
-    let { shouldMeasure, renderedItems, measuredItems } = this.state;
+  public render(): JSX.Element {
+    let { onRender, onReduce } = this.props;
+    let { props, shouldMeasure } = this.state;
+    const data: T = onReduce(props);
+
     return (
       <div ref={ this._resolveRef('_root') }>
-        { shouldMeasure && (
+        { shouldMeasure ? (
           <div className={ css(styles.measured) } ref={ this._resolveRef('_measured') }>
-            { onRenderItems(measuredItems) }
+            { onRender(data) }
           </div>
-        ) }
+        ) : onRender(data) }
 
-        { renderedItems.length > 0 && onRenderItems(renderedItems) }
       </div>
 
     );
   }
 
-  public componentDidUpdate(prevProps: IResizeGroupProps) {
+  public componentDidUpdate(prevProps: IResizeGroupProps<T>) {
     this._measureItems();
   }
 
@@ -61,27 +56,22 @@ export class ResizeGroup extends BaseComponent<IResizeGroupProps, IResizeGroupSt
   }
 
   private _measureItems() {
-    let { items, onReduceItems } = this.props;
-    let {
-      shouldMeasure,
-      renderedItems,
-      measuredItems,
-    } = this.state;
+    let { onRender, onReduce } = this.props;
 
-    if (shouldMeasure && items && items.length > 0) {
+    if (this.state.shouldMeasure) {
       let container = this._root.getBoundingClientRect();
       let measured = this._measured.getBoundingClientRect();
       if ((measured.width > container.width)) {
         this.setState((prevState, props) => {
           return {
-            measuredItems: onReduceItems(prevState.measuredItems, props),
+            props: this.data,
           };
         });
       } else {
         this.setState((prevState, props) => {
           return {
-            renderedItems: measuredItems,
-            measuredItems: this.props.items.concat([]),
+            filteredProps: prevState.filteredProps,
+            originalProps: prevState.originalProps,
             shouldMeasure: false
           };
         });

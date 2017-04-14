@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { IOverFlowItemState } from './ResizeGroup';
+import { IResizeGroupState } from './ResizeGroup';
 
-export interface IResizeGroupProps extends React.HTMLProps<HTMLElement> {
-  items?: any[];
-  onRenderItems?: (items: any[]) => JSX.Element;
-  onReduceItems?: (prevItems: IOverFlowItemState, props: IResizeGroupProps) => IOverFlowItemState;
+export interface IResizeGroupProps<T> extends React.Props<IResizeGroupState<T>> {
+  onRender: <T>(props: T) => JSX.Element;
+  onReduce: <T>(currentProps: T) => T;
 }
