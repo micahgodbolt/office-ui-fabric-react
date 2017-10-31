@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion } from './Accordion';
+import { Accordion } from './BaseAccordion';
 import { IButtonProps } from 'office-ui-fabric-react/lib/Button';
 // import { IStyle } from '../../Styling';
 

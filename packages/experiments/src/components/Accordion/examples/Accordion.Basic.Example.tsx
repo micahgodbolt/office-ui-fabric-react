@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion } from '../Accordion';
+import { Accordion } from '../BaseAccordion';
 import { IAccordionProps } from './../Accordion.Props';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 

@@ -1,2 +1,2 @@
-export * from './Accordion';
+export * from './BaseAccordion';
 export * from './Accordion.Props';
