@@ -19,9 +19,6 @@ export class AccordionBasicExample extends React.Component<IAccordionProps, {}> 
           onRenderContent={ this._onRenderContent }
           buttonProps={ {
             children: 'Click Me',
-            styles: {
-              root: { background: 'green' },
-            },
             iconProps: { iconName: 'delete' },
             menuIconProps: {}
           } }

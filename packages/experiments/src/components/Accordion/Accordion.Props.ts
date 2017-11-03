@@ -1,3 +1,4 @@
+/* tslint:disable:no-any */
 import * as React from 'react';
 import { Accordion } from './BaseAccordion';
 import { IButtonProps } from 'office-ui-fabric-react/lib/Button';
@@ -13,6 +14,6 @@ export interface IAccordionProps extends React.Props<Accordion> {
   componentRef?: (component: IAccordion) => void;
 
   buttonProps?: IButtonProps;
-  onRenderContent?: (props: IAccordionProps) => JSX.Element;
+  onRenderContent?: (props?: IAccordionProps) => JSX.Element;
   isSplit?: boolean;
 }
