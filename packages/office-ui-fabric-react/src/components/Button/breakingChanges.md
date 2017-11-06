@@ -1,0 +1,1 @@
+removed props.baseProps
