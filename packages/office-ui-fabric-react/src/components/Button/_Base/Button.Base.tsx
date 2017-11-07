@@ -58,14 +58,14 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
 
     const nativeProps = this._getNativeProps(this.props, renderAsAnchor);
 
-    const {ariaDescribedBy, ariaLabeledBy, ariaLabel, ariaHidden} = this._getAriaProps(this.props, nativeProps);
+    const { ariaDescribedBy, ariaLabeledBy, ariaLabel, ariaHidden } = this._getAriaProps(this.props, nativeProps);
 
     return React.createElement(
       renderAsAnchor ? 'a' : 'button',
       {
         ...nativeProps,
-        type: !renderAsAnchor && 'button',
         className: 'root',
+        type: !renderAsAnchor && 'button',
         'disabled': disabled,
         'aria-label': ariaLabel,
         'aria-labelledby': ariaLabeledBy,
@@ -105,18 +105,20 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
   private _getAriaProps(props: IButtonProps, nativeProps: {}) {
     let ariaDescribedBy: string | null = null;
     let ariaLabeledBy: string | null = null;
+    let nativeAriaDescribedBy: string | null = (nativeProps as any)['aria-describedby'];
+    let nativeAriaLabeledBy: string | null = (nativeProps as any)['aria-labelledby'];
 
     if (props.ariaDescription) {
       ariaDescribedBy = this._ariaDescriptionId;
     } else if (props.description) {
       ariaDescribedBy = this._descriptionId;
-    } else if ((nativeProps as any)['aria-describedby']) {
-      ariaDescribedBy = (nativeProps as any)['aria-describedby'];
+    } else if (nativeAriaDescribedBy) {
+      ariaDescribedBy = nativeAriaDescribedBy;
     }
 
     if (!props.ariaLabel) {
-      if ((nativeProps as any)['aria-labelledby']) {
-        ariaLabeledBy = (nativeProps as any)['aria-labelledby'];
+      if (nativeAriaLabeledBy) {
+        ariaLabeledBy = nativeAriaLabeledBy;
       } else if (ariaDescribedBy) {
         ariaLabeledBy = props.text ? this._labelId : null;
       }
@@ -145,10 +147,10 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
       onRenderDescription = this._onRenderDescription
     } = props;
 
-    if ( text || description || onRenderText || onRenderDescription) {
+    if (text || description || onRenderText || onRenderDescription) {
       return (
         <div className={ 'textContainer' } >
-          { onRenderText({...props, text}, this._onRenderText) }
+          { onRenderText({ ...props, text }, this._onRenderText) }
           { onRenderDescription(props, this._onRenderDescription) }
         </div>
       );
@@ -179,14 +181,14 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
   }
 
   @autobind
-  private _onRenderDescription(props: IButtonProps): JSX.Element | null{
+  private _onRenderDescription(props: IButtonProps): JSX.Element | null {
     const {
     description
     } = this.props;
 
     // ms-Button-description is only shown when the button type is compound.
     // In other cases it will not be displayed.
-    if (description)  {
+    if (description) {
       return (
         <div
           key={ this._descriptionId }
@@ -222,7 +224,7 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
 
     // If ariaDescription is given, descriptionId will be assigned to ariaDescriptionSpan,
     // otherwise it will be assigned to descriptionSpan.
-    if ( ariaDescription ) {
+    if (ariaDescription) {
       return (
         <span className={ 'screenReaderText' } id={ this._ariaDescriptionId }>{ ariaDescription }</span>
       );
