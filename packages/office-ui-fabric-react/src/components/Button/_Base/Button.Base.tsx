@@ -62,8 +62,6 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
 
     const nativeProps = this._getNativeProps(this.props, renderAsAnchor);
 
-    const { ariaDescribedBy, ariaLabeledBy, ariaLabel, ariaHidden } = this._getAriaProps(this.props, nativeProps);
-
     return React.createElement(
       renderAsAnchor ? 'a' : 'button',
       {
@@ -71,12 +69,8 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
         className: className,
         type: !renderAsAnchor && 'button',
         'disabled': disabled,
-        'aria-label': ariaLabel,
-        'aria-labelledby': ariaLabeledBy,
-        'aria-describedby': ariaDescribedBy,
         'data-is-focusable': ((this.props as any)['data-is-focusable'] === false || disabled) ? false : true,
         'aria-pressed': checked,
-        'aria-hidden': ariaHidden
       },
       onRenderIcon(this.props, this._onRenderIcon),
       this._onRenderTextContents(this.props),
@@ -103,32 +97,6 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
       renderAsAnchor ? anchorProperties : buttonProperties,
       ['disabled']
     );
-  }
-
-  @autobind
-  private _getAriaProps(props: IButtonProps, nativeProps: {}) {
-    let ariaDescribedBy: string | null = null;
-    let ariaLabeledBy: string | null = null;
-    let nativeAriaDescribedBy: string | null = (nativeProps as any)['aria-describedby'];
-    let nativeAriaLabeledBy: string | null = (nativeProps as any)['aria-labelledby'];
-
-    if (props.ariaDescription) {
-      ariaDescribedBy = this.props.ariaDescriptionId!;
-    } else if (props.description) {
-      ariaDescribedBy = this.props.descriptionId!;
-    } else if (nativeAriaDescribedBy) {
-      ariaDescribedBy = nativeAriaDescribedBy;
-    }
-
-    if (!props.ariaLabel) {
-      if (nativeAriaLabeledBy) {
-        ariaLabeledBy = nativeAriaLabeledBy;
-      } else if (ariaDescribedBy) {
-        ariaLabeledBy = props.text ? this.props.labelId! : null;
-      }
-    }
-
-    return { ariaDescribedBy, ariaLabeledBy, ariaLabel: props.ariaLabel, ariaHidden: props.ariaHidden };
   }
 
   @autobind
