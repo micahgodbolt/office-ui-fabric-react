@@ -13,7 +13,13 @@ import {
 import { Icon, IIconProps } from '../../../Icon';
 import { IButtonProps, IButton } from '../Button.Props';
 
-export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButton {
+export interface IButtonBaseProps extends IButtonProps {
+  labelId?: string;
+  descriptionId?: string;
+  ariaDescriptionId?: string;
+}
+
+export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements IButton {
 
   public static defaultProps = {
     baseClassName: 'ms-Button',
@@ -50,8 +56,6 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
       onRenderMenuIcon = this._onRenderMenuIcon
     } = this.props;
 
-    const { _ariaDescriptionId, _labelId, _descriptionId } = this;
-
     // Anchor tag cannot be disabled hence in disabled state rendering
     // anchor button as normal button
     const renderAsAnchor: boolean = !disabled && !!href;
@@ -64,7 +68,7 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
       renderAsAnchor ? 'a' : 'button',
       {
         ...nativeProps,
-        className: 'root',
+        className: className,
         type: !renderAsAnchor && 'button',
         'disabled': disabled,
         'aria-label': ariaLabel,
@@ -109,9 +113,9 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
     let nativeAriaLabeledBy: string | null = (nativeProps as any)['aria-labelledby'];
 
     if (props.ariaDescription) {
-      ariaDescribedBy = this._ariaDescriptionId;
+      ariaDescribedBy = this.props.ariaDescriptionId!;
     } else if (props.description) {
-      ariaDescribedBy = this._descriptionId;
+      ariaDescribedBy = this.props.descriptionId!;
     } else if (nativeAriaDescribedBy) {
       ariaDescribedBy = nativeAriaDescribedBy;
     }
@@ -120,7 +124,7 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
       if (nativeAriaLabeledBy) {
         ariaLabeledBy = nativeAriaLabeledBy;
       } else if (ariaDescribedBy) {
-        ariaLabeledBy = props.text ? this._labelId : null;
+        ariaLabeledBy = props.text ? this.props.labelId! : null;
       }
     }
 
@@ -160,17 +164,18 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
   }
 
   @autobind
-  private _onRenderText(props: IButtonProps): JSX.Element | null {
+  private _onRenderText(props: IButtonBaseProps): JSX.Element | null {
     let {
-      text
+      text,
+      labelId = this._labelId
     } = props;
 
     if (text) {
       return (
         <div
-          key={ this._labelId }
+          key={ labelId }
           className={ 'label' }
-          id={ this._labelId }
+          id={ labelId }
         >
           { text }
         </div>
@@ -181,9 +186,10 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
   }
 
   @autobind
-  private _onRenderDescription(props: IButtonProps): JSX.Element | null {
+  private _onRenderDescription(props: IButtonBaseProps): JSX.Element | null {
     const {
-    description
+    description,
+      descriptionId = this._descriptionId
     } = this.props;
 
     // ms-Button-description is only shown when the button type is compound.
@@ -191,9 +197,9 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
     if (description) {
       return (
         <div
-          key={ this._descriptionId }
+          key={ descriptionId }
           className={ 'description' }
-          id={ this._descriptionId }
+          id={ descriptionId }
         >
           { description }
         </div>
@@ -217,8 +223,9 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
   }
 
   @autobind
-  private _onRenderAriaDescription(): JSX.Element | null {
+  private _onRenderAriaDescription(props: IButtonBaseProps): JSX.Element | null {
     const {
+      ariaDescriptionId = this._ariaDescriptionId,
       ariaDescription
     } = this.props;
 
@@ -226,7 +233,7 @@ export class ButtonBase extends BaseComponent<IButtonProps, {}> implements IButt
     // otherwise it will be assigned to descriptionSpan.
     if (ariaDescription) {
       return (
-        <span className={ 'screenReaderText' } id={ this._ariaDescriptionId }>{ ariaDescription }</span>
+        <span className={ 'screenReaderText' } id={ ariaDescriptionId }>{ ariaDescription }</span>
       );
     }
 
