@@ -14,8 +14,6 @@ import './examples/Button.Basic.Example.scss';
 import * as exampleStylesImport from '../../common/_exampleStyles.scss';
 const exampleStyles: any = exampleStylesImport;
 
-
-
 export interface IButtonDemoPageState {
   areButtonsDisabled?: boolean;
   areButtonsChecked?: boolean;
@@ -55,7 +53,6 @@ export class ButtonPage extends React.Component<IComponentDemoPageProps, IButton
 
           </div>
         }
-
 
         overview={
           <div />

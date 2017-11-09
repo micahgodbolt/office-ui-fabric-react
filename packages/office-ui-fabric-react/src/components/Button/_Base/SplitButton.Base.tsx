@@ -11,16 +11,17 @@ import {
   KeyCodes
 } from '../../../Utilities';
 import { getAriaProps } from './ButtonUtils';
-import { IButtonProps, IButton } from '../Button.Props';
 import { ButtonBase } from './Button.Base';
 import { IButtonBaseProps } from './Button.Base.Props';
-import { ContextualButtonBase } from './ContextualButton.Base';
+import { MenuButtonBase } from './MenuButton.Base';
+import { IMenuButtonProps } from './MenuButton.Base.Props';
+import { ISplitButton, ISplitButtonProps } from './SplitButton.Base.Props';
 
 export interface ISplitButtonState {
   menuOpen?: boolean;
 }
 
-export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonState> implements IButton {
+export class SplitButtonBase extends BaseComponent<ISplitButtonProps, ISplitButtonState> implements ISplitButton {
 
   private get _isExpanded(): boolean {
     return !!this.state.menuOpen;
@@ -39,7 +40,7 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
   private _descriptionId: string;
   private _ariaDescriptionId: string;
 
-  constructor(props: IButtonProps, rootClassName: string) {
+  constructor(props: ISplitButtonProps, rootClassName: string) {
     super(props);
 
     this._labelId = getId();
@@ -56,7 +57,6 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
       className,
       disabled,
       primaryDisabled,
-      styles,
       checked,
       text
     } = this.props;
@@ -80,7 +80,7 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
       ref: this._resolveRef('_buttonElement')
     };
 
-    const contextualButtonProps: IButtonProps = {
+    const menuButtonProps: IMenuButtonProps = {
       menuIconProps: this.props.menuIconProps || { iconName: 'ChevronDown' },
       menuProps: {
         items: [], // assure that items won't be empty
@@ -94,11 +94,9 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
     };
 
     const primaryProps: IButtonBaseProps = {
-      ...this.props,
+      ...this.props as IButtonBaseProps,
       menuIconProps: undefined,
-      menuProps: undefined,
       onRenderMenuIcon: undefined,
-      onRenderMenu: undefined,
       ariaLabel: undefined,
       ariaHidden: undefined,
       ariaDescription: undefined,
@@ -113,7 +111,7 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
           { ...primaryProps }
           disabled={ this.props.primaryDisabled }
         />
-        <ContextualButtonBase {...contextualButtonProps} />
+        <MenuButtonBase {...menuButtonProps} />
       </div>
     );
 
