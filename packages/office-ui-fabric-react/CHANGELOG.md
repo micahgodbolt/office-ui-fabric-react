@@ -1,6 +1,30 @@
 # Change Log - office-ui-fabric-react
 
-This log was last generated on Sun, 05 Nov 2017 23:27:32 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Nov 2017 06:05:34 GMT and should not be manually modified.
+
+## 5.20.3
+Wed, 08 Nov 2017 06:05:34 GMT
+
+### Patches
+
+- Selection: calling `setItems` with new items will now invalidate the internal selection array.
+- Persona: DirectionalHint for Tooltip location, polished example spacing and documentation on PersonaPage.
+- Preserve focus in DetailsList when items change
+
+## 5.20.2
+Tue, 07 Nov 2017 11:22:30 GMT
+
+### Patches
+
+- Checkbox: Expose icon props for the check mark
+- added aira0expanded property to contextMenu item so that narrator will announce expand/collapse state of a menu item if it has submenu items.
+
+## 5.20.1
+Mon, 06 Nov 2017 18:44:43 GMT
+
+### Patches
+
+- Fixing Icon amd import.
 
 ## 5.20.0
 Sun, 05 Nov 2017 23:27:32 GMT
@@ -54,7 +78,7 @@ Thu, 02 Nov 2017 18:20:18 GMT
 - Facepile style debugging, includes new FacepileButton
 - Menus: Update so they have one notion of focus (from both hover and keyboard)
 - Split Button in Menu: add vertical divider component and hook to customize splitbutton in menu div classname
-- Persona: Changed PersonaSize names from descriptive to numerical. 
+- Persona: Changed PersonaSize names from descriptive to numerical.
 - TextField/DatePicker: The required astrisk is now more correctly positioned.
 
 ## 5.17.1
@@ -240,7 +264,7 @@ Thu, 12 Oct 2017 10:20:49 GMT
 
 ### Minor changes
 
-- Dropdown: add onDismiss callback. Example multi select dropdown with filters, we want to apply filters after user has dismissed the dropdown. 
+- Dropdown: add onDismiss callback. Example multi select dropdown with filters, we want to apply filters after user has dismissed the dropdown.
 - OverflowSet: Add FocusZoneProps and the ability to set the role
 - Callout: Added optional button at the bottom of the callout container
 - ComboBox: added selectedIndex prop and inputFieldText prop for more control over comboBox behavior
@@ -257,7 +281,7 @@ Wed, 11 Oct 2017 10:11:04 GMT
 
 ### Minor changes
 
-- ComboBox: Adding props to control height and width of Callout 
+- ComboBox: Adding props to control height and width of Callout
 - "Move getItemClassnNames forontextualMenuProps to IContextualMenuItem"
 - Make Modal's FocusTrapZone controllable
 
@@ -369,7 +393,7 @@ Fri, 29 Sep 2017 10:20:24 GMT
 - DetailsList: Allow resizing columns wider than maxWidth in justified layout
 - ContextualMenu: Make sure to check items within a menu section for the 'canCheck' property
 - Updating mergeStyleSets usage in various components to adhere to correct typing.
-- Split out and cleaned up TextField examples to better reflect the toolkit. 
+- Split out and cleaned up TextField examples to better reflect the toolkit.
 - DatePicker: call correct callback when previous year button is clicked
 
 ## 5.1.0
@@ -818,7 +842,7 @@ Fri, 11 Aug 2017 19:38:35 GMT
 - FocusZone: adjusting initialization logic to remove a potential memory leak in server rendered scenarios.
 - ComboBox: Update example to work correctly now that StrictNullChecks have been put in place
 - Nav: update isGroupCollapsed for new groups
-- Change dropdown's role from "combobox" to "menu" 
+- Change dropdown's role from "combobox" to "menu"
 - Changed DatePicker role to be more accurate for screen readers
 - Selection: Fix broken selection state in example.
 
@@ -836,7 +860,7 @@ Tue, 08 Aug 2017 15:28:32 GMT
 
 - BaseButton: Added screenReaderText styles to base button
 - BaseButton: Remove the IconButton dependency that was introduced with SplitButton.
-- Added role alert to "no results" view 
+- Added role alert to "no results" view
 
 ## 4.30.1
 Mon, 07 Aug 2017 10:22:46 GMT
@@ -988,7 +1012,7 @@ Fri, 21 Jul 2017 10:21:45 GMT
 
 ### Patches
 
-- Do not redundantly set aria-label on command bar items. 
+- Do not redundantly set aria-label on command bar items.
 - More strict null check fixes in office-ui-fabric-react
 - Textfield: Fixed regression in disabled styles
 - ResizeGroup: Use scrollWidth instead of clientWidth for measuring hidden div
@@ -1155,7 +1179,7 @@ Fri, 30 Jun 2017 19:44:26 GMT
 ### Patches
 
 - Breadcrumb: Use flexbox for layout to better support multiple font sizes
-- MessageBar: Fixed padding regressions with multiline and no actions 
+- MessageBar: Fixed padding regressions with multiline and no actions
 
 ## 4.13.1
 Fri, 30 Jun 2017 10:23:15 GMT
@@ -1209,7 +1233,7 @@ Tue, 27 Jun 2017 01:26:31 GMT
 
 ### Minor changes
 
-- Commandbar: fix synchronous reflow 
+- Commandbar: fix synchronous reflow
 - Enhancing the calendar component to allow for turning off the day picker and highlighting the "today" month in the month picker. This will match the behavior of the Timestrip component in today's JSMVVM OWA Calendar.
 
 ### Patches
@@ -1455,7 +1479,7 @@ Tue, 30 May 2017 03:27:20 GMT
 
 ### Patches
 
-- DetailsList: initialFocusedIndex is considered on already mounted rows 
+- DetailsList: initialFocusedIndex is considered on already mounted rows
 - SelectionZone: Update behavior to fix using up/down arrows to navigate between groups in a GroupedList.
 - Introduce prop-types instead of React.PropTypes
 - List: improved measure logic and fix nested list scroll problem
@@ -1774,7 +1798,7 @@ Wed, 19 Apr 2017 03:17:40 GMT
 ### Patches
 
 - DatePicker: Improve screen-reader accessibility.
-- Regression Test: Contextual Menu 
+- Regression Test: Contextual Menu
 - fix nit for Suggestion.tsx
 
 ## 2.19.0
@@ -1938,7 +1962,7 @@ Wed, 29 Mar 2017 18:15:29 GMT
 
 - FocusZone: Adding support for default browser behavior when pressing alt + a key.
 - Chaning scss imports to use typescript `import` instead of `require` so that lib-amd build actually imports via AMD require and not commonjs require.
-- PeoplePicker: Adding changes for multiple selection onChange 
+- PeoplePicker: Adding changes for multiple selection onChange
 
 ## 2.10.1
 Wed, 29 Mar 2017 15:10:15 GMT
@@ -2051,7 +2075,7 @@ Thu, 16 Mar 2017 03:05:54 GMT
 ### Minor changes
 
 - DocumentCard: Add aria role and keyboard handling
-- Panel: Added sticky footer section and broke each panel region into seperate onRender fucntion. 
+- Panel: Added sticky footer section and broke each panel region into seperate onRender fucntion.
 
 ### Patches
 
@@ -2127,7 +2151,7 @@ Thu, 09 Mar 2017 06:11:07 GMT
 
 ### Breaking changes
 
-- IMPORTANT: 
+- IMPORTANT:
 
 This pull request converts ALL components over to use module css. What does this mean?
 
@@ -2145,7 +2169,7 @@ Problems that still exist:
 4. The bundles themselves have a lot of duplicate css. Because we generate rtl rules and theme tokens at build time rather than at runtime, we must download extra code, which bulks up the download size.
 5. Fabric core rules, which we implicitly rely on, are a hard thing to chase. If your page depends on core 6, and you're also using react components, you will find bugs. We'd like to eliminate this dependency so that it is reliable and contractual to use components. If you use a `ContextualMenu`, it should animate without depending on fabric-core css to be loaded.
 
-We are planning to address these and evaluating library options. Issue being tracked here: #983 
+We are planning to address these and evaluating library options. Issue being tracked here: #983
 
 
 ### Minor changes
@@ -2560,7 +2584,7 @@ Thu, 12 Jan 2017 04:06:30 GMT
 - DetailsList: when adding new items in a grouped DetailsList scenario, the group is no longer recreated.
 - Dialog: Removing deprecated rootProps usage for the close button.
 - Persona: Set an explicit height for the image area and image.
-- Persona now has a default way of generating initials and colors 
+- Persona now has a default way of generating initials and colors
 - Pivot: Fix a11y - duplicate tabIds, aria-controls linking
 - TextField: aria-describedby is only set when a description is available.
 
@@ -2825,7 +2849,7 @@ Mon, 05 Dec 2016 04:02:30 GMT
 
 ### Minor changes
 
-- Nav: adding support for `selectedKey`. 
+- Nav: adding support for `selectedKey`.
 
 ### Patches
 
