@@ -12,8 +12,9 @@ import {
 } from '../../../Utilities';
 import { getAriaProps } from './ButtonUtils';
 import { IButtonProps, IButton } from '../Button.Props';
-import { ButtonBase, IButtonBaseProps } from '../_Base/Button.Base';
-import { ContextualButtonBase } from '../_Base/ContextualButton.Base';
+import { ButtonBase } from './Button.Base';
+import { IButtonBaseProps } from './Button.Base.Props';
+import { ContextualButtonBase } from './ContextualButton.Base';
 
 export interface ISplitButtonState {
   menuOpen?: boolean;
@@ -62,14 +63,14 @@ export class SplitButtonBase extends BaseComponent<IButtonProps, ISplitButtonSta
 
     const {
       ariaDescribedBy,
-      ariaLabeledBy,
+      ariaLabelledBy,
       ariaLabel,
       ariaHidden,
       ariaDescription
     } = getAriaProps(this.props, getNativeProps(this.props, ['div']));
 
     const buttonProps = {
-      'aria-labelledby': ariaLabeledBy,
+      'aria-labelledby': ariaLabelledBy,
       'aria-disabled': disabled,
       'aria-haspopup': true,
       'aria-expanded': this._isExpanded,

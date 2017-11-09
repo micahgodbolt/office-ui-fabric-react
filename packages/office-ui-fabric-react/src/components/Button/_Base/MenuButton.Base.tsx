@@ -10,21 +10,21 @@ import {
   getNativeProps,
   KeyCodes
 } from '../../../Utilities';
-import { ButtonBase } from '../.';
+import { ButtonBase } from './Button.Base';
 import { Icon, IIconProps } from '../../../Icon';
 import { DirectionalHint } from '../../../common/DirectionalHint';
 import { ContextualMenu, IContextualMenuProps } from '../../../ContextualMenu';
-import { IButtonProps, IButton } from '../Button.Props';
+import { IMenuButtonProps } from './MenuButton.Base.Props';
 
-export interface IContextualButtonBaseState {
+export interface IMenuButtonBaseState {
   menuIsOpen: boolean;
 }
 
-export class ContextualButtonBase extends BaseComponent<IButtonProps, IContextualButtonBaseState> {
+export class MenuButtonBase extends BaseComponent<IMenuButtonProps, IMenuButtonBaseState> {
 
-  private _contextualButton: HTMLElement;
+  private _menuButton: HTMLElement;
 
-  constructor(props: IButtonProps) {
+  constructor(props: IMenuButtonProps) {
     super(props);
 
     this.state = {
@@ -64,7 +64,7 @@ export class ContextualButtonBase extends BaseComponent<IButtonProps, IContextua
         directionalHint={ DirectionalHint.bottomLeftEdge }
         {...menuProps}
         className={ 'ms-BaseButton-menuhost ' + menuProps.className }
-        target={ this._contextualButton }
+        target={ this._menuButton }
         labelElementId={ 'labelID' }
         onDismiss={ onDismiss }
       />
@@ -73,7 +73,7 @@ export class ContextualButtonBase extends BaseComponent<IButtonProps, IContextua
 
   @autobind
   private _onToggleMenu(): void {
-    this.setState((prevState: IContextualButtonBaseState) => {
+    this.setState((prevState: IMenuButtonBaseState) => {
       return { menuIsOpen: !prevState.menuIsOpen };
     });
   }

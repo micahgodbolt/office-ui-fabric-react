@@ -11,15 +11,10 @@ import {
   KeyCodes
 } from '../../../Utilities';
 import { Icon, IIconProps } from '../../../Icon';
-import { IButtonProps, IButton } from '../Button.Props';
+import { IButtonBaseProps, IButtonBase } from './Button.Base.Props';
+import { getAriaProps } from './ButtonUtils';
 
-export interface IButtonBaseProps extends IButtonProps {
-  labelId?: string;
-  descriptionId?: string;
-  ariaDescriptionId?: string;
-}
-
-export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements IButton {
+export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements IButtonBase {
 
   public static defaultProps = {
     baseClassName: 'ms-Button',
@@ -32,12 +27,9 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
   private _descriptionId: string;
   private _ariaDescriptionId: string;
 
-  constructor(props: IButtonProps, rootClassName: string) {
+  constructor(props: IButtonBaseProps, rootClassName: string) {
     super(props);
 
-    this._warnDeprecations({
-      rootProps: undefined
-    });
     this._labelId = getId();
     this._descriptionId = getId();
     this._ariaDescriptionId = getId();
@@ -48,7 +40,6 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
       className,
       disabled,
       href,
-      styles,
       checked,
       onRenderIcon = this._onRenderIcon,
       onRenderAriaDescription = this._onRenderAriaDescription,
@@ -62,6 +53,17 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
 
     const nativeProps = this._getNativeProps(this.props, renderAsAnchor);
 
+    const {
+      ariaDescribedBy,
+      ariaLabelledBy,
+      ariaLabel,
+      ariaHidden,
+      ariaDescription
+    } = getAriaProps(
+        this.props,
+        getNativeProps(this.props, [renderAsAnchor ? 'a' : 'button']
+        ));
+
     return React.createElement(
       renderAsAnchor ? 'a' : 'button',
       {
@@ -71,6 +73,9 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
         'disabled': disabled,
         'data-is-focusable': ((this.props as any)['data-is-focusable'] === false || disabled) ? false : true,
         'aria-pressed': checked,
+        'aria-label': ariaLabel,
+        'aria-labelledby': ariaLabelledBy,
+        'aria-describedby': ariaDescribedBy
       },
       onRenderIcon(this.props, this._onRenderIcon),
       this._onRenderTextContents(this.props),
@@ -91,7 +96,7 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
   }
 
   @autobind
-  private _getNativeProps(props: IButtonProps, renderAsAnchor: boolean) {
+  private _getNativeProps(props: IButtonBaseProps, renderAsAnchor: boolean) {
     return getNativeProps(
       props,
       renderAsAnchor ? anchorProperties : buttonProperties,
@@ -100,17 +105,17 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
   }
 
   @autobind
-  private _onRenderIcon(props: IButtonProps): JSX.Element | null {
+  private _onRenderIcon(props: IButtonBaseProps): JSX.Element | null {
     return props.iconProps ? <Icon {...props.iconProps} /> : null;
   }
 
   @autobind
-  private _onRenderMenuIcon(props: IButtonProps): JSX.Element | null {
+  private _onRenderMenuIcon(props: IButtonBaseProps): JSX.Element | null {
     return props.menuIconProps ? <Icon {...props.menuIconProps} /> : null;
   }
 
   @autobind
-  private _onRenderTextContents(props: IButtonProps): JSX.Element | null {
+  private _onRenderTextContents(props: IButtonBaseProps): JSX.Element | null {
     let {
       description,
       children,

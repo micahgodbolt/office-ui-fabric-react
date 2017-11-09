@@ -11,4 +11,4 @@ export * from './MessageBarButton/MessageBarButton';
 export * from './PrimaryButton/PrimaryButton';
 export * from './IconButton/IconButton';
 export * from './_Base/Button.Base';
-export * from './_Base/ContextualButton.Base';
+export * from './_Base/MenuButton.Base';

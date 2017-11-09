@@ -1,10 +1,13 @@
 import * as React from 'react';
 import {
-  BaseComponent
+  BaseComponent,
+  getNativeProps
 } from '../../Utilities';
 import { IButtonProps, IButton } from './Button.Props';
 import { ButtonBase } from './_Base/Button.Base';
-import { ContextualButtonBase } from './_Base/ContextualButton.Base';
+import { IButtonBaseProps } from './_Base/Button.Base.Props';
+import { MenuButtonBase } from './_Base/MenuButton.Base';
+import { IMenuButtonProps } from './_Base/MenuButton.Base.Props';
 import { SplitButtonBase } from './_Base/SplitButton.Base';
 
 export class BaseButton extends BaseComponent<IButtonProps, {}> {
@@ -21,11 +24,11 @@ export class BaseButton extends BaseComponent<IButtonProps, {}> {
       );
     } else if (this.props.menuProps) {
       return (
-        <ContextualButtonBase {...this.props} />
+        <MenuButtonBase {...this.props as IMenuButtonProps} />
       );
     } else {
       return (
-        <ButtonBase {...this.props} />
+        <ButtonBase {...this.props as IButtonBaseProps } />
       );
     }
 

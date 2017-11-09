@@ -2,9 +2,9 @@ import { IButtonProps } from '../Button.Props';
 
 export function getAriaProps(props: IButtonProps, nativeProps: {}) {
   let ariaDescribedBy: string | null = null;
-  let ariaLabeledBy: string | null = null;
+  let ariaLabelledBy: string | null = null;
   let nativeAriaDescribedBy: string | null = (nativeProps as any)['aria-describedby'];
-  let nativeAriaLabeledBy: string | null = (nativeProps as any)['aria-labelledby'];
+  let nativeAriaLabelledBy: string | null = (nativeProps as any)['aria-labelledby'];
 
   if (props.ariaDescription) {
     ariaDescribedBy = this._ariaDescriptionId;
@@ -15,16 +15,16 @@ export function getAriaProps(props: IButtonProps, nativeProps: {}) {
   }
 
   if (!props.ariaLabel) {
-    if (nativeAriaLabeledBy) {
-      ariaLabeledBy = nativeAriaLabeledBy;
+    if (nativeAriaLabelledBy) {
+      ariaLabelledBy = nativeAriaLabelledBy;
     } else if (ariaDescribedBy) {
-      ariaLabeledBy = props.text ? this._labelId : null;
+      ariaLabelledBy = props.text ? this._labelId : null;
     }
   }
 
   return {
     ariaDescribedBy,
-    ariaLabeledBy,
+    ariaLabelledBy,
     ariaLabel: props.ariaLabel,
     ariaHidden: props.ariaHidden,
     ariaDescription: props.ariaDescription
