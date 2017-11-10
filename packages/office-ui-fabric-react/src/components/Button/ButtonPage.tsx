@@ -6,7 +6,7 @@ import {
   PropertiesTableSet
 } from '@uifabric/example-app-base';
 
-import { ButtonBaseExample } from './_Base/Button.Base.Example';
+import { TestButtonExample } from './TestButton/TestButton.Example';
 import { ComponentStatus } from '../../demo/ComponentStatus/ComponentStatus';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Link } from '../../Link';
@@ -48,7 +48,7 @@ export class ButtonPage extends React.Component<IComponentDemoPageProps, IButton
               onChange={ this._onToggledChanged.bind(this) }
             />
             <ExampleCard title='Default Button'>
-              <ButtonBaseExample disabled={ this.state.areButtonsDisabled } checked={ this.state.areButtonsChecked } />
+              <TestButtonExample disabled={ this.state.areButtonsDisabled } checked={ this.state.areButtonsChecked } />
             </ExampleCard>
 
           </div>

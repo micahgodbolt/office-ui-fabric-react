@@ -16,7 +16,7 @@ export class ButtonBaseExample extends React.Component<IButtonProps, {}> {
           description='description'
           onClick={ this._alertClicked }
         />
-        <BaseButton
+        {/* <BaseButton
           disabled={ disabled }
           checked={ checked }
           text='ContextualButton'
@@ -57,7 +57,7 @@ export class ButtonBaseExample extends React.Component<IButtonProps, {}> {
               }
             ]
           } }
-        />
+        /> */}
       </div>
 
     );

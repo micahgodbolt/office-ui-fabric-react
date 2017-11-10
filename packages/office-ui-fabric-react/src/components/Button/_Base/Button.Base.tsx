@@ -8,20 +8,25 @@ import {
   buttonProperties,
   getId,
   getNativeProps,
-  KeyCodes
+  KeyCodes,
+  customizable
 } from '../../../Utilities';
 import { Icon, IIconProps } from '../../../Icon';
-import { IButtonBaseProps, IButtonBase } from './Button.Base.Props';
+import { IButtonBaseProps, IButtonBase, IButtonBaseStyleProps, IButtonBaseStyles } from './Button.Base.Props';
 import { getAriaProps } from './ButtonUtils';
+import {
+  classNamesFunction
+} from '../../../Styling';
 
+const getClassNames = classNamesFunction<IButtonBaseStyleProps, IButtonBaseStyles>();
+
+@customizable('ButtonBase', ['theme'])
 export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements IButtonBase {
 
   public static defaultProps = {
-    baseClassName: 'ms-Button',
-    classNames: {},
-    styles: {}
   };
 
+  private _classNames: {[key in keyof IButtonBaseStyles]: string };
   private _buttonElement: HTMLElement;
   private _labelId: string;
   private _descriptionId: string;
@@ -37,10 +42,13 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
 
   public render(): JSX.Element {
     const {
+      theme,
       className,
       disabled,
       href,
       checked,
+      getStyles,
+      expanded,
       onRenderIcon = this._onRenderIcon,
       onRenderAriaDescription = this._onRenderAriaDescription,
       onRenderChildren = this._onRenderChildren,
@@ -64,11 +72,13 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
         getNativeProps(this.props, [renderAsAnchor ? 'a' : 'button']
         ));
 
+    this._classNames = getClassNames(getStyles!, { theme: theme!, className, disabled, checked, expanded });
+
     return React.createElement(
       renderAsAnchor ? 'a' : 'button',
       {
         ...nativeProps,
-        className: className,
+        className: 'ms-Button ' + this._classNames.root,
         type: !renderAsAnchor && 'button',
         'disabled': disabled,
         'data-is-focusable': ((this.props as any)['data-is-focusable'] === false || disabled) ? false : true,
@@ -106,12 +116,12 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
 
   @autobind
   private _onRenderIcon(props: IButtonBaseProps): JSX.Element | null {
-    return props.iconProps ? <Icon {...props.iconProps} /> : null;
+    return props.iconProps ? <Icon className={ this._classNames.icon } {...props.iconProps} /> : null;
   }
 
   @autobind
   private _onRenderMenuIcon(props: IButtonBaseProps): JSX.Element | null {
-    return props.menuIconProps ? <Icon {...props.menuIconProps} /> : null;
+    return props.menuIconProps ? <Icon className={ this._classNames.menuIcon } {...props.menuIconProps} /> : null;
   }
 
   @autobind
@@ -126,7 +136,7 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
 
     if (text || description || onRenderText || onRenderDescription) {
       return (
-        <div className={ 'textContainer' } >
+        <div className={ this._classNames.textContainer } >
           { onRenderText({ ...props, text }, this._onRenderText) }
           { onRenderDescription(props, this._onRenderDescription) }
         </div>
@@ -147,7 +157,7 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
       return (
         <div
           key={ labelId }
-          className={ 'label' }
+          className={ this._classNames.label }
           id={ labelId }
         >
           { text }
@@ -171,7 +181,7 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
       return (
         <div
           key={ descriptionId }
-          className={ 'description' }
+          className={ this._classNames.description }
           id={ descriptionId }
         >
           { description }
@@ -206,7 +216,7 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
     // otherwise it will be assigned to descriptionSpan.
     if (ariaDescription) {
       return (
-        <span className={ 'screenReaderText' } id={ ariaDescriptionId }>{ ariaDescription }</span>
+        <span className={ this._classNames.screenReaderText } id={ ariaDescriptionId }>{ ariaDescription }</span>
       );
     }
 

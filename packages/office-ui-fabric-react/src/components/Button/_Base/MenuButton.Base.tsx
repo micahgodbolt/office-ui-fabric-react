@@ -8,24 +8,27 @@ import {
   buttonProperties,
   getId,
   getNativeProps,
-  KeyCodes
+  KeyCodes,
+  customizable
 } from '../../../Utilities';
 import { ButtonBase } from './Button.Base';
+import { IButtonBaseProps } from './Button.Base.Props';
 import { Icon, IIconProps } from '../../../Icon';
 import { DirectionalHint } from '../../../common/DirectionalHint';
 import { ContextualMenu, IContextualMenuProps } from '../../../ContextualMenu';
-import { IMenuButtonProps } from './MenuButton.Base.Props';
+import { IMenuButtonBaseProps, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.Base.Props';
 
 export interface IMenuButtonBaseState {
   menuIsOpen: boolean;
 }
+@customizable('MenuButtonBase', ['theme'])
+export class MenuButtonBase extends BaseComponent<IMenuButtonBaseProps, IMenuButtonBaseState> {
 
-export class MenuButtonBase extends BaseComponent<IMenuButtonProps, IMenuButtonBaseState> {
+  private _labelId: string;
 
-  private _menuButton: HTMLElement;
-
-  constructor(props: IMenuButtonProps) {
+  constructor(props: IMenuButtonBaseProps) {
     super(props);
+    this._labelId = getId();
 
     this.state = {
       menuIsOpen: false
@@ -34,14 +37,23 @@ export class MenuButtonBase extends BaseComponent<IMenuButtonProps, IMenuButtonB
 
   public render(): JSX.Element {
     const {
+      className,
+      disabled,
+      checked,
+      theme,
       menuProps,
       onRenderMenu = this._onRenderMenu
     } = this.props;
+
     return (
       <ButtonBase
         onClick={ this._onMenuClick }
         onKeyDown={ this._onMenuKeyDown }
-        {...this.props}
+        labelId={ this._labelId }
+        expanded={ this.state.menuIsOpen }
+        aria-expanded={ this.state.menuIsOpen }
+        {...this.props as IButtonBaseProps}
+        data-target-id={ this._labelId }
       >
         { this.state.menuIsOpen && menuProps &&
           onRenderMenu(menuProps, this._onRenderMenu)
@@ -56,16 +68,19 @@ export class MenuButtonBase extends BaseComponent<IMenuButtonProps, IMenuButtonB
 
   @autobind
   private _onRenderMenu(menuProps: IContextualMenuProps): JSX.Element {
-    const { onDismiss = this._onToggleMenu } = menuProps;
+    const {
+      onDismiss = this._onToggleMenu,
+      target = `[data-target-id='${this._labelId}']`
+    } = menuProps;
 
     return (
       <ContextualMenu
-        id={ '-menu' }
+        id={ this._labelId + '-menu' }
         directionalHint={ DirectionalHint.bottomLeftEdge }
         {...menuProps}
         className={ 'ms-BaseButton-menuhost ' + menuProps.className }
-        target={ this._menuButton }
-        labelElementId={ 'labelID' }
+        target={ target }
+        labelElementId={ this._labelId }
         onDismiss={ onDismiss }
       />
     );

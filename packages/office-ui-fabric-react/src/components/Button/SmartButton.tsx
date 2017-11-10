@@ -6,11 +6,11 @@ import {
 import { ButtonBase } from './_Base/Button.Base';
 import { IButtonBaseProps } from './_Base/Button.Base.Props';
 import { MenuButtonBase } from './_Base/MenuButton.Base';
-import { IMenuButtonProps } from './_Base/MenuButton.Base.Props';
+import { IMenuButtonBaseProps } from './_Base/MenuButton.Base.Props';
 import { SplitButtonBase } from './_Base/SplitButton.Base';
-import { ISplitButtonProps } from './_Base/SplitButton.Base.Props';
+import { ISplitButtonBaseProps } from './_Base/SplitButton.Base.Props';
 
-export class BaseButton extends BaseComponent<ISplitButtonProps, {}> {
+export class BaseButton extends BaseComponent<ISplitButtonBaseProps, {}> {
 
   private get _isSplitButton(): boolean {
     return (!!this.props.menuProps && !!this.props.onClick) && this.props.split === true;
@@ -24,7 +24,7 @@ export class BaseButton extends BaseComponent<ISplitButtonProps, {}> {
       );
     } else if (this.props.menuProps) {
       return (
-        <MenuButtonBase {...this.props as IMenuButtonProps} />
+        <MenuButtonBase {...this.props as IMenuButtonBaseProps} />
       );
     } else {
       return (

@@ -3,6 +3,11 @@ import { ButtonBase } from './Button.Base';
 import { IRenderFunction } from '../../../Utilities';
 import { IContextualMenuProps } from '../../ContextualMenu';
 import { IIconProps } from '../../Icon';
+import {
+  IStyle,
+  IStyleFunction,
+  ITheme
+} from '../../../Styling';
 
 export interface IButtonBase {
   /**
@@ -46,9 +51,19 @@ export interface IButtonBaseProps extends React.AllHTMLAttributes<HTMLAnchorElem
   checked?: boolean;
 
   /**
+   * Whether the button is expanded. Typically this is when a connected menu is open.
+   */
+  expanded?: boolean;
+
+  /**
    * If provided, additional class name to provide on the root element.
    */
   className?: string;
+
+  /**
+   * Theme (provided through customization.)
+   */
+  theme?: ITheme;
 
   /**
    * The aria label of the button for the benefit of screen readers.
@@ -132,4 +147,28 @@ export interface IButtonBaseProps extends React.AllHTMLAttributes<HTMLAnchorElem
    */
   onRenderMenuIcon?: IRenderFunction<IButtonBaseProps>;
 
+  /**
+   * Call to provide customized styling that will layer on top of the variant rules.
+   */
+  getStyles?: IStyleFunction<IButtonBaseStyleProps, IButtonBaseStyles>;
+
+}
+
+export interface IButtonBaseStyles {
+  root?: IStyle;
+  flexContainer?: IStyle;
+  textContainer?: IStyle;
+  icon?: IStyle;
+  label?: IStyle;
+  menuIcon?: IStyle;
+  description?: IStyle;
+  screenReaderText?: IStyle;
+}
+
+export interface IButtonBaseStyleProps {
+  theme: ITheme;
+  className?: string;
+  disabled?: boolean;
+  checked?: boolean;
+  expanded?: boolean;
 }
