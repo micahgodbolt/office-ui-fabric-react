@@ -50,7 +50,6 @@ export class ButtonPage extends React.Component<IComponentDemoPageProps, IButton
             <ExampleCard title='Default Button'>
               <TestButtonExample disabled={ this.state.areButtonsDisabled } checked={ this.state.areButtonsChecked } />
             </ExampleCard>
-
           </div>
         }
 
