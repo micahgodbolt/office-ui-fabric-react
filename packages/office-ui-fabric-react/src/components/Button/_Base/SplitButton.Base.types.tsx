@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IMenuButtonBaseProps, IMenuButtonBase, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.Base.Props';
+import { IMenuButtonBaseProps, IMenuButtonBase, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.Base.types';
 import { IRenderFunction } from '../../../Utilities';
 
 export interface ISplitButton extends IMenuButtonBase {

@@ -1,4 +1,4 @@
-import { IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from '../_Base/MenuButton.Base.Props';
+import { IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from '../_Base/MenuButton.Base.types';
 
 export const getStyles = (props: IMenuButtonBaseStyleProps): IMenuButtonBaseStyles => {
   const { theme, checked, disabled, expanded } = props;

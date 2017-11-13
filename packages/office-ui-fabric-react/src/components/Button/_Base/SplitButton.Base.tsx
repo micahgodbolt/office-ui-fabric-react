@@ -12,10 +12,10 @@ import {
 } from '../../../Utilities';
 import { getAriaProps } from './ButtonUtils';
 import { ButtonBase } from './Button.Base';
-import { IButtonBaseProps } from './Button.Base.Props';
+import { IButtonBaseProps } from './Button.Base.types';
 import { MenuButtonBase } from './MenuButton.Base';
-import { IMenuButtonBaseProps } from './MenuButton.Base.Props';
-import { ISplitButton, ISplitButtonBaseProps } from './SplitButton.Base.Props';
+import { IMenuButtonBaseProps } from './MenuButton.Base.types';
+import { ISplitButton, ISplitButtonBaseProps } from './SplitButton.Base.types';
 import { FocusZone, FocusZoneDirection } from '../../FocusZone';
 
 export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> implements ISplitButton {

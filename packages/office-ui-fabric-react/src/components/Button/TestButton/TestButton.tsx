@@ -4,7 +4,7 @@ import {
   ISplitButtonBaseProps,
   ISplitButtonBaseStyles,
   ISplitButtonBaseStyleProps
-} from '../_Base/SplitButton.Base.Props';
+} from '../_Base/SplitButton.Base.types';
 import { SplitButtonBase } from '../_Base/SplitButton.Base';
 import { styled } from '../../../Styling';
 import { getStyles } from './TestButton.styles';

@@ -4,11 +4,11 @@ import {
   getNativeProps
 } from '../../Utilities';
 import { ButtonBase } from './_Base/Button.Base';
-import { IButtonBaseProps } from './_Base/Button.Base.Props';
+import { IButtonBaseProps } from './_Base/Button.Base.types';
 import { MenuButtonBase } from './_Base/MenuButton.Base';
-import { IMenuButtonBaseProps } from './_Base/MenuButton.Base.Props';
+import { IMenuButtonBaseProps } from './_Base/MenuButton.Base.types';
 import { SplitButtonBase } from './_Base/SplitButton.Base';
-import { ISplitButtonBaseProps } from './_Base/SplitButton.Base.Props';
+import { ISplitButtonBaseProps } from './_Base/SplitButton.Base.types';
 
 export class BaseButton extends BaseComponent<ISplitButtonBaseProps, {}> {
 

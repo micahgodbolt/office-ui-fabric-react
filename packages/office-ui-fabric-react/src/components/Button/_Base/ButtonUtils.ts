@@ -1,6 +1,6 @@
-import { IButtonProps } from '../Button.Props';
+import { IButtonBaseProps } from './Button.Base.types';
 
-export function getAriaProps(props: IButtonProps, nativeProps: {}) {
+export function getAriaProps(props: IButtonBaseProps, nativeProps: {}) {
   let ariaDescribedBy: string | null = null;
   let ariaLabelledBy: string | null = null;
   let nativeAriaDescribedBy: string | null = (nativeProps as any)['aria-describedby'];
