@@ -42,7 +42,7 @@ export class MenuButtonBase extends BaseComponent<IMenuButtonBaseProps, IMenuBut
       checked,
       theme,
       menuProps,
-      getMenuStyles,
+      getStyles,
       onRenderMenu = this._onRenderMenu
     } = this.props;
     return (
@@ -53,7 +53,7 @@ export class MenuButtonBase extends BaseComponent<IMenuButtonBaseProps, IMenuBut
         expanded={ this.state.menuIsOpen }
         aria-expanded={ this.state.menuIsOpen }
         {...this.props as IButtonBaseProps}
-        getStyles={ getMenuStyles }
+        getStyles={ getStyles }
         data-target-id={ this._labelId }
       >
         { this.state.menuIsOpen && menuProps &&

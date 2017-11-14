@@ -20,8 +20,15 @@ import { IMenuButtonBaseProps, IMenuButtonBaseStyles } from './MenuButton.Base.t
 import {
   ISplitButton,
   ISplitButtonBaseProps,
+  ISplitButtonBaseStyleProps,
+  ISplitButtonBaseStyles
 } from './SplitButton.Base.types';
 import { FocusZone, FocusZoneDirection } from '../../FocusZone';
+import {
+  classNamesFunction
+} from '../../../Styling';
+
+const getClassNames = classNamesFunction<ISplitButtonBaseStyleProps, ISplitButtonBaseStyles>();
 
 @customizable('SplitButtonBase', ['theme'])
 export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> implements ISplitButton {
@@ -30,6 +37,7 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
     split: false
   };
 
+  private _splitClassNames: {[key in keyof ISplitButtonBaseStyles]: string };
   private _buttonElement: HTMLElement;
   private _splitButtonContainer: HTMLElement;
   private _labelId: string;
@@ -62,8 +70,7 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
       menuButtonAs: MenuButtonType = MenuButtonBase,
     } = this.props;
 
-    // this._primaryClassNames = getClassNames(getStyles!, { theme: theme!, className, disabled, checked, expanded });
-    // this._menuClassNames = getClassNames(getMenuStyles!, { theme: theme!, className, disabled, checked, expanded });
+    this._splitClassNames = getClassNames(getStyles!, { theme: theme!, className, disabled, checked, expanded });
 
     const {
       ariaDescribedBy,
@@ -110,13 +117,16 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
     };
 
     return (
-      <FocusZone { ...buttonProps } direction={ FocusZoneDirection.horizontal }>
+      <FocusZone
+        className={ this._splitClassNames.root }
+        { ...buttonProps }
+        direction={ FocusZoneDirection.horizontal }
+      >
         <ButtonType
           { ...primaryProps }
           disabled={ this.props.primaryDisabled }
         />
-        <VerticalDivider
-        />
+        <VerticalDivider />
         <MenuButtonType {...menuButtonProps} />
       </FocusZone>
     );

@@ -99,8 +99,9 @@ export const getStyles = (props: ISplitButtonBaseStyleProps): ISplitButtonBaseSt
   return ({
     root: [
       'ms-Split-Button', {
+        padding: '5px', // to see the bg working
         background: 'blue',
-        display: 'flex',
+        display: 'inline-flex',
       }
     ],
     divider: {

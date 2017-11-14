@@ -46,7 +46,7 @@ export interface IMenuButtonBaseProps extends IButtonBaseProps {
   /**
    * Call to provide customized styling that will layer on top of the variant rules.
    */
-  getMenuStyles?: IStyleFunction<IMenuButtonBaseStyleProps, IMenuButtonBaseStyles>;
+  getStyles?: IStyleFunction<IMenuButtonBaseStyleProps, IMenuButtonBaseStyles>;
 }
 
 export interface IMenuButtonBaseStyles extends IButtonBaseStyles {
