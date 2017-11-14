@@ -12,7 +12,7 @@ import {
   customizable
 } from '../../../Utilities';
 import { Icon, IIconProps } from '../../../Icon';
-import { IButtonBaseProps, IButtonBase, IButtonBaseStyleProps, IButtonBaseStyles } from './Button.Base.types';
+import { IButtonBaseProps, IButtonBase, IButtonBaseStyleProps, IButtonBaseStyles } from './Button.base.types';
 import { getAriaProps } from './ButtonUtils';
 import {
   classNamesFunction

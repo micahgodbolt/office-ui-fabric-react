@@ -1,19 +1,23 @@
 import * as React from 'react';
-
+import {
+  BaseComponent,
+  getNativeProps
+} from '../../../Utilities';
 import {
   ISplitButtonBaseProps,
   ISplitButtonBaseStyles,
   ISplitButtonBaseStyleProps
-} from '../_Base/SplitButton.Base.types';
-import { SplitButtonBase } from '../_Base/SplitButton.Base';
-import { ButtonBase } from '../_Base/Button.Base';
-import { MenuButtonBase } from '../_Base/MenuButton.Base';
-import { VerticalDivider } from '../../../Divider';
+} from '../_base/SplitButton.base.types';
 import { styled } from '../../../Styling';
+import { ButtonBase } from '../_base/Button.base';
+import { IButtonBaseProps } from '../_base/Button.base.types';
+import { MenuButtonBase } from '../_base/MenuButton.base';
+import { IMenuButtonBaseProps } from '../_base/MenuButton.base.types';
+import { SplitButtonBase } from '../_base/SplitButton.base';
+
 import { getStyles, getButtonStyles, getMenuButtonStyles } from './TestButton.styles';
 
-// Create a Breadcrumb variant which uses these default styles and this styled subcomponent.
-export const TestButton = styled(
+const TestSplitButton = styled(
   SplitButtonBase,
   getStyles,
   props => ({
@@ -21,3 +25,38 @@ export const TestButton = styled(
     menuButtonAs: styled(MenuButtonBase, getMenuButtonStyles)
   })
 );
+
+const MenuButton = styled(
+  MenuButtonBase,
+  getButtonStyles,
+  props => ({
+    menuIconProps: { iconName: 'ChevronDown' }
+  })
+);
+
+const Button = styled(
+  ButtonBase,
+  getButtonStyles
+);
+
+export class TestButton extends BaseComponent<ISplitButtonBaseProps, {}> {
+
+  public render(): JSX.Element {
+    const isSplit = !!this.props.menuProps && !!this.props.onClick && this.props.split;
+
+    if (isSplit) {
+      return (
+        <TestSplitButton {...this.props} />
+      );
+    } else if (this.props.menuProps) {
+      return (
+        <MenuButton {...this.props as IMenuButtonBaseProps} />
+      );
+    } else {
+      return (
+        <Button {...this.props as IButtonBaseProps } />
+      );
+    }
+
+  }
+}

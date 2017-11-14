@@ -11,12 +11,12 @@ import {
   KeyCodes,
   customizable
 } from '../../../Utilities';
-import { ButtonBase } from './Button.Base';
-import { IButtonBaseProps } from './Button.Base.types';
+import { ButtonBase } from './Button.base';
+import { IButtonBaseProps } from './Button.base.types';
 import { Icon, IIconProps } from '../../../Icon';
 import { DirectionalHint } from '../../../common/DirectionalHint';
 import { ContextualMenu, IContextualMenuProps } from '../../../ContextualMenu';
-import { IMenuButtonBaseProps, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.Base.types';
+import { IMenuButtonBaseProps, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.base.types';
 
 export interface IMenuButtonBaseState {
   menuIsOpen: boolean;

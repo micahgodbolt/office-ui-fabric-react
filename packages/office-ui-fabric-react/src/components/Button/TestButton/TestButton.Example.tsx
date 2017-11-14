@@ -9,12 +9,37 @@ export class TestButtonExample extends React.Component<IBaseButtonProps, {}> {
 
     return (
       <div>
-
         <TestButton
           disabled={ disabled }
           checked={ checked }
+          onClick={ this._alertClicked }
           text='BaseButton'
-          description='description!!'
+        />
+        <TestButton
+          disabled={ disabled }
+          checked={ checked }
+          text='Menu'
+          menuProps={ {
+            items: [
+              {
+                key: 'emailMessage',
+                name: 'Email message',
+                icon: 'Mail'
+              },
+              {
+                key: 'calendarEvent',
+                name: 'Calendar event',
+                icon: 'Calendar'
+              }
+            ]
+          } }
+        />
+        <TestButton
+          disabled={ disabled }
+          checked={ checked }
+          text='Split'
+          split
+          onClick={ this._alertClicked }
           menuProps={ {
             items: [
               {

@@ -1,6 +1,6 @@
-import { ISplitButtonBaseStyleProps, ISplitButtonBaseStyles } from '../_Base/SplitButton.Base.types';
-import { IButtonBaseStyles, IButtonBaseStyleProps } from '../_Base/Button.Base.types';
-import { IMenuButtonBaseStyles, IMenuButtonBaseStyleProps } from '../_Base/MenuButton.Base.types';
+import { ISplitButtonBaseStyleProps, ISplitButtonBaseStyles } from '../_base/SplitButton.base.types';
+import { IButtonBaseStyles, IButtonBaseStyleProps } from '../_base/Button.base.types';
+import { IMenuButtonBaseStyles, IMenuButtonBaseStyleProps } from '../_base/MenuButton.base.types';
 
 export const getButtonStyles = (props: IButtonBaseStyleProps): IButtonBaseStyles => {
   const { theme, checked, disabled, expanded } = props;
@@ -22,6 +22,7 @@ export const getButtonStyles = (props: IButtonBaseStyleProps): IButtonBaseStyles
   return ({
     root: [
       {
+        display: 'inline-flex',
         backgroundColor: 'red',
         color: buttonText,
         selectors: {

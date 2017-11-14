@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ButtonBase } from './Button.Base';
+import { ButtonBase } from './Button.base';
 import { IRenderFunction } from '../../../Utilities';
 import { IContextualMenuProps } from '../../ContextualMenu';
 import { IIconProps } from '../../Icon';

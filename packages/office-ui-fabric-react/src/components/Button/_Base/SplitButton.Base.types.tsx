@@ -4,8 +4,8 @@ import {
   IMenuButtonBase,
   IMenuButtonBaseStyleProps,
   IMenuButtonBaseStyles
-} from './MenuButton.Base.types';
-import { IButtonBaseProps } from './Button.Base.types';
+} from './MenuButton.base.types';
+import { IButtonBaseProps } from './Button.base.types';
 import { IVerticalDividerProps } from '../../../Divider';
 import { IComponentAs } from '../../../Utilities';
 import {

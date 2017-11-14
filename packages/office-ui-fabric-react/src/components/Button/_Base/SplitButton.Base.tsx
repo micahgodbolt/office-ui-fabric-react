@@ -13,16 +13,16 @@ import {
 } from '../../../Utilities';
 import { getAriaProps } from './ButtonUtils';
 import { VerticalDivider } from '../../Divider';
-import { ButtonBase } from './Button.Base';
-import { IButtonBaseProps, IButtonBaseStyles } from './Button.Base.types';
-import { MenuButtonBase } from './MenuButton.Base';
-import { IMenuButtonBaseProps, IMenuButtonBaseStyles } from './MenuButton.Base.types';
+import { ButtonBase } from './Button.base';
+import { IButtonBaseProps, IButtonBaseStyles } from './Button.base.types';
+import { MenuButtonBase } from './MenuButton.base';
+import { IMenuButtonBaseProps, IMenuButtonBaseStyles } from './MenuButton.base.types';
 import {
   ISplitButton,
   ISplitButtonBaseProps,
   ISplitButtonBaseStyleProps,
   ISplitButtonBaseStyles
-} from './SplitButton.Base.types';
+} from './SplitButton.base.types';
 import { FocusZone, FocusZoneDirection } from '../../FocusZone';
 import {
   classNamesFunction
