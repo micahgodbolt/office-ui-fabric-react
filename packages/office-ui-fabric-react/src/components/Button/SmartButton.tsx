@@ -12,13 +12,10 @@ import { ISplitButtonBaseProps } from './_Base/SplitButton.Base.types';
 
 export class BaseButton extends BaseComponent<ISplitButtonBaseProps, {}> {
 
-  private get _isSplitButton(): boolean {
-    return (!!this.props.menuProps && !!this.props.onClick) && this.props.split === true;
-  }
-
   public render(): JSX.Element {
+    const isSplit = !!this.props.menuProps && !!this.props.onClick && this.props.split;
 
-    if (this._isSplitButton) {
+    if (isSplit) {
       return (
         <SplitButtonBase {...this.props } />
       );

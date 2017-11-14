@@ -73,25 +73,25 @@ export class ButtonBase extends BaseComponent<IButtonBaseProps, {}> implements I
         ));
 
     this._classNames = getClassNames(getStyles!, { theme: theme!, className, disabled, checked, expanded });
-
-    return React.createElement(
-      renderAsAnchor ? 'a' : 'button',
-      {
-        ...nativeProps,
-        className: 'ms-Button ' + this._classNames.root,
-        type: !renderAsAnchor && 'button',
-        'disabled': disabled,
-        'data-is-focusable': ((this.props as any)['data-is-focusable'] === false || disabled) ? false : true,
-        'aria-pressed': checked,
-        'aria-label': ariaLabel,
-        'aria-labelledby': ariaLabelledBy,
-        'aria-describedby': ariaDescribedBy
-      },
-      onRenderIcon(this.props, this._onRenderIcon),
-      this._onRenderTextContents(this.props),
-      onRenderAriaDescription(this.props, this._onRenderAriaDescription),
-      onRenderChildren(this.props, this._onRenderChildren),
-      onRenderMenuIcon(this.props, this._onRenderMenuIcon)
+    let RootType = renderAsAnchor ? 'a' : 'button';
+    return (
+      <RootType
+        {...nativeProps}
+        className={ 'ms-Button ' + this._classNames.root }
+        type={ !renderAsAnchor && 'button' }
+        disabled={ disabled }
+        data-is-focusable={ ((this.props as any)['data-is-focusable'] === false || disabled) ? false : true }
+        aria-pressed={ checked }
+        aria-label={ ariaLabel }
+        aria-labelledby={ ariaLabelledBy }
+        aria-describedby={ ariaDescribedBy }
+      >
+        { onRenderIcon(this.props, this._onRenderIcon) }
+        { this._onRenderTextContents(this.props) }
+        { onRenderAriaDescription(this.props, this._onRenderAriaDescription) }
+        { onRenderChildren(this.props, this._onRenderChildren) }
+        { onRenderMenuIcon(this.props, this._onRenderMenuIcon) }
+      </RootType>
     );
   }
 

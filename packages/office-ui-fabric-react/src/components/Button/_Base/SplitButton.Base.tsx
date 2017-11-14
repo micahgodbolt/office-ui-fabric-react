@@ -8,16 +8,22 @@ import {
   buttonProperties,
   getId,
   getNativeProps,
-  KeyCodes
+  KeyCodes,
+  customizable
 } from '../../../Utilities';
 import { getAriaProps } from './ButtonUtils';
+import { VerticalDivider } from '../../Divider';
 import { ButtonBase } from './Button.Base';
-import { IButtonBaseProps } from './Button.Base.types';
+import { IButtonBaseProps, IButtonBaseStyles } from './Button.Base.types';
 import { MenuButtonBase } from './MenuButton.Base';
-import { IMenuButtonBaseProps } from './MenuButton.Base.types';
-import { ISplitButton, ISplitButtonBaseProps } from './SplitButton.Base.types';
+import { IMenuButtonBaseProps, IMenuButtonBaseStyles } from './MenuButton.Base.types';
+import {
+  ISplitButton,
+  ISplitButtonBaseProps,
+} from './SplitButton.Base.types';
 import { FocusZone, FocusZoneDirection } from '../../FocusZone';
 
+@customizable('SplitButtonBase', ['theme'])
 export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> implements ISplitButton {
 
   public static defaultProps = {
@@ -48,8 +54,16 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
       disabled,
       primaryDisabled,
       checked,
-      text
+      text,
+      getStyles,
+      theme,
+      expanded,
+      buttonAs: ButtonType = ButtonBase,
+      menuButtonAs: MenuButtonType = MenuButtonBase,
     } = this.props;
+
+    // this._primaryClassNames = getClassNames(getStyles!, { theme: theme!, className, disabled, checked, expanded });
+    // this._menuClassNames = getClassNames(getMenuStyles!, { theme: theme!, className, disabled, checked, expanded });
 
     const {
       ariaDescribedBy,
@@ -89,6 +103,7 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
       ariaLabel: undefined,
       ariaHidden: undefined,
       ariaDescription: undefined,
+      getStyles: undefined,
       ariaDescriptionId: this._ariaDescriptionId,
       labelId: this._labelId,
       descriptionId: this._descriptionId
@@ -96,11 +111,13 @@ export class SplitButtonBase extends BaseComponent<ISplitButtonBaseProps, {}> im
 
     return (
       <FocusZone { ...buttonProps } direction={ FocusZoneDirection.horizontal }>
-        <ButtonBase
+        <ButtonType
           { ...primaryProps }
           disabled={ this.props.primaryDisabled }
         />
-        <MenuButtonBase {...menuButtonProps} />
+        <VerticalDivider
+        />
+        <MenuButtonType {...menuButtonProps} />
       </FocusZone>
     );
 

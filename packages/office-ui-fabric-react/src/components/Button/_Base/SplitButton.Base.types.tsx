@@ -1,6 +1,18 @@
 import * as React from 'react';
-import { IMenuButtonBaseProps, IMenuButtonBase, IMenuButtonBaseStyleProps, IMenuButtonBaseStyles } from './MenuButton.Base.types';
-import { IRenderFunction } from '../../../Utilities';
+import {
+  IMenuButtonBaseProps,
+  IMenuButtonBase,
+  IMenuButtonBaseStyleProps,
+  IMenuButtonBaseStyles
+} from './MenuButton.Base.types';
+import { IButtonBaseProps } from './Button.Base.types';
+import { IVerticalDividerProps } from '../../../Divider';
+import { IComponentAs } from '../../../Utilities';
+import {
+  IStyle,
+  IStyleFunction,
+  ITheme
+} from '../../../Styling';
 
 export interface ISplitButton extends IMenuButtonBase {
 
@@ -23,10 +35,20 @@ export interface ISplitButtonBaseProps extends IMenuButtonBaseProps {
    */
   primaryDisabled?: boolean;
 
+  /**
+  * Call to provide customized styling that will layer on top of the variant rules.
+  */
+  buttonAs?: IComponentAs<IButtonBaseProps>;
+
+  // dividerAs?: IComponentAs<IVerticalDividerProps>;
+
+  menuButtonAs?: IComponentAs<IMenuButtonBaseProps>;
+
 }
 
-export interface ISplitButtonBaseStyles extends IMenuButtonBaseStyles {
-
+export interface ISplitButtonBaseStyles {
+  root?: IStyle;
+  divider?: IStyle; // not working yet. Split needs to take className or getStyles
 }
 
 export interface ISplitButtonBaseStyleProps extends IMenuButtonBaseStyleProps {
