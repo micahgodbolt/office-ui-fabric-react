@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IContextualMenuItem, IContextualMenuProps } from '../../ContextualMenu';
+import { IContextualMenuItem } from '../../ContextualMenu';
 import { IButtonStyles, IButtonProps } from '../../Button';
 import { ICommandBarData } from './CommandBar.base';
 import { IStyle, ITheme } from '../../Styling';
@@ -48,11 +48,6 @@ export interface ICommandBarProps extends React.HTMLAttributes<HTMLDivElement> {
    * Custom button to be used as oveflow button
    */
   overflowButtonAs?: IComponentAs<IButtonProps>;
-
-  /**
-   * Menu props to be passed to overflow elipsis
-   */
-  overflowMenuProps?: Partial<IContextualMenuProps>;
 
   /**
    * Custom button to be used as near and far items
