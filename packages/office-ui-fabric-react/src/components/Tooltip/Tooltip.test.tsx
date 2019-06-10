@@ -61,6 +61,7 @@ describe('Tooltip', () => {
 
     const component = mount(
       <TooltipBase
+        delay={TooltipDelay.zero}
         calloutProps={calloutProps}
         content={content}
         directionalHint={directionalHint}
