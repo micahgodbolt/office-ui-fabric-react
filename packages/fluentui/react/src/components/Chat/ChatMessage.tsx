@@ -1,16 +1,11 @@
-import {
-  Accessibility,
-  IS_FOCUSABLE_ATTRIBUTE,
-  chatMessageBehavior,
-  menuAsToolbarBehavior,
-} from '@fluentui/accessibility'
-import * as customPropTypes from '@fluentui/react-proptypes'
-import { Ref } from '@fluentui/react-component-ref'
-import * as React from 'react'
-import * as PropTypes from 'prop-types'
-import cx from 'classnames'
-import * as _ from 'lodash'
-import { Popper } from '../../utils/positioner'
+import { Accessibility, IS_FOCUSABLE_ATTRIBUTE, chatMessageBehavior, menuAsToolbarBehavior } from '@fluentui/accessibility';
+import * as customPropTypes from '@fluentui/react-proptypes';
+import { Ref } from '@fluentui/react-component-ref';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import cx from 'classnames';
+import * as _ from 'lodash';
+import { Popper } from '../../utils/positioner';
 
 import {
   childrenExist,
@@ -23,113 +18,104 @@ import {
   commonPropTypes,
   rtlTextContainer,
   applyAccessibilityKeyHandlers,
-  ShorthandFactory,
-} from '../../utils'
-import {
-  WithAsProp,
-  ShorthandValue,
-  ComponentEventHandler,
-  withSafeTypeForAs,
-  ShorthandCollection,
-} from '../../types'
+  ShorthandFactory
+} from '../../utils';
+import { WithAsProp, ShorthandValue, ComponentEventHandler, withSafeTypeForAs, ShorthandCollection } from '../../types';
 
-import Box, { BoxProps } from '../Box/Box'
-import Label, { LabelProps } from '../Label/Label'
-import Menu, { MenuProps } from '../Menu/Menu'
-import { MenuItemProps } from '../Menu/MenuItem'
-import Text, { TextProps } from '../Text/Text'
-import Reaction, { ReactionProps } from '../Reaction/Reaction'
-import { ReactionGroupProps } from '../Reaction/ReactionGroup'
-import { ComponentSlotStylesResolved } from '@fluentui/styles'
+import Box, { BoxProps } from '../Box/Box';
+import Label, { LabelProps } from '../Label/Label';
+import Menu, { MenuProps } from '../Menu/Menu';
+import { MenuItemProps } from '../Menu/MenuItem';
+import Text, { TextProps } from '../Text/Text';
+import Reaction, { ReactionProps } from '../Reaction/Reaction';
+import { ReactionGroupProps } from '../Reaction/ReactionGroup';
+import { ComponentSlotStylesResolved } from '@fluentui/styles';
 
 export interface ChatMessageSlotClassNames {
-  actionMenu: string
-  author: string
-  timestamp: string
-  badge: string
-  content: string
-  reactionGroup: string
+  actionMenu: string;
+  author: string;
+  timestamp: string;
+  badge: string;
+  content: string;
+  reactionGroup: string;
 }
 
-export interface ChatMessageProps
-  extends UIComponentProps,
-    ChildrenComponentProps,
-    ContentComponentProps<ShorthandValue<BoxProps>> {
+export interface ChatMessageProps extends UIComponentProps, ChildrenComponentProps, ContentComponentProps<ShorthandValue<BoxProps>> {
   /** Accessibility behavior if overridden by the user. */
-  accessibility?: Accessibility
+  accessibility?: Accessibility;
 
   /** Menu with actions of the message. */
-  actionMenu?: ShorthandValue<MenuProps> | ShorthandCollection<MenuItemProps>
+  actionMenu?: ShorthandValue<MenuProps> | ShorthandCollection<MenuItemProps>;
 
   /** Controls messages's relation to other chat messages. Is automatically set by the ChatItem. */
-  attached?: boolean | 'top' | 'bottom'
+  attached?: boolean | 'top' | 'bottom';
 
   /** Author of the message. */
-  author?: ShorthandValue<TextProps>
+  author?: ShorthandValue<TextProps>;
 
   /** Indicates whether message belongs to the current user. */
-  mine?: boolean
+  mine?: boolean;
 
   /** Timestamp of the message. */
-  timestamp?: ShorthandValue<TextProps>
+  timestamp?: ShorthandValue<TextProps>;
 
   /** Badge attached to the message. */
-  badge?: ShorthandValue<LabelProps>
+  badge?: ShorthandValue<LabelProps>;
 
   /** A message can format the badge to appear at the start or the end of the message. */
-  badgePosition?: 'start' | 'end'
+  badgePosition?: 'start' | 'end';
 
   /**
    * Called after user's blur.
    * @param event - React's original SyntheticEvent.
    * @param data - All props.
    */
-  onBlur?: ComponentEventHandler<ChatMessageProps>
+  onBlur?: ComponentEventHandler<ChatMessageProps>;
 
   /**
    * Called after user's focus.
    * @param event - React's original SyntheticEvent.
    * @param data - All props.
    */
-  onFocus?: ComponentEventHandler<ChatMessageProps>
+  onFocus?: ComponentEventHandler<ChatMessageProps>;
 
   /**
    * Called after user enters by mouse.
    * @param event - React's original SyntheticEvent.
    * @param data - All props.
    */
-  onMouseEnter?: ComponentEventHandler<ChatMessageProps>
+  onMouseEnter?: ComponentEventHandler<ChatMessageProps>;
 
   /** Allows suppression of action menu positioning for performance reasons */
-  positionActionMenu?: boolean
+  positionActionMenu?: boolean;
 
   /** Reaction group applied to the message. */
-  reactionGroup?: ShorthandValue<ReactionGroupProps> | ShorthandCollection<ReactionProps>
+  reactionGroup?: ShorthandValue<ReactionGroupProps> | ShorthandCollection<ReactionProps>;
 
   /** A message can format the reactions group to appear at the start or the end of the message. */
-  reactionGroupPosition?: 'start' | 'end'
+  reactionGroupPosition?: 'start' | 'end';
 
   /** Positions an actionMenu slot in "fixed" mode. */
-  unstable_overflow?: boolean
+  unstable_overflow?: boolean;
 }
 
 export interface ChatMessageState {
-  focused: boolean
-  messageNode: HTMLElement
+  focused: boolean;
+  messageNode: HTMLElement;
 }
 
 class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageState> {
-  static className = 'ui-chat__message'
+  static className = 'ui-chat__message';
 
-  static create: ShorthandFactory<ChatMessageProps>
+  static create: ShorthandFactory<ChatMessageProps>;
 
-  static slotClassNames: ChatMessageSlotClassNames
+  static slotClassNames: ChatMessageSlotClassNames;
 
-  static displayName = 'ChatMessage'
+  static displayName = 'ChatMessage';
 
-  static __isChatMessage = true
+  static __isChatMessage = true;
 
-  static isTypeOfElement = element => _.get(element, `type.__isChatMessage`)
+  static isTypeOfElement = element => _.get(element, `type.__isChatMessage`);
 
   static propTypes = {
     ...commonPropTypes.createCommon({ content: 'shorthand' }),
@@ -144,30 +130,27 @@ class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageS
     onFocus: PropTypes.func,
     onMouseEnter: PropTypes.func,
     positionActionMenu: PropTypes.bool,
-    reactionGroup: PropTypes.oneOfType([
-      customPropTypes.collectionShorthand,
-      customPropTypes.itemShorthand,
-    ]),
+    reactionGroup: PropTypes.oneOfType([customPropTypes.collectionShorthand, customPropTypes.itemShorthand]),
     reactionGroupPosition: PropTypes.oneOf(['start', 'end']),
-    unstable_overflow: PropTypes.bool,
-  }
+    unstable_overflow: PropTypes.bool
+  };
 
   static defaultProps = {
     accessibility: chatMessageBehavior,
     as: 'div',
     badgePosition: 'end',
     positionActionMenu: true,
-    reactionGroupPosition: 'start',
-  }
+    reactionGroupPosition: 'start'
+  };
 
-  updateActionsMenuPosition = () => {}
+  updateActionsMenuPosition = () => {};
 
   state = {
     focused: false,
-    messageNode: null,
-  }
+    messageNode: null
+  };
 
-  menuRef = React.createRef<HTMLElement>()
+  menuRef = React.createRef<HTMLElement>();
 
   actionHandlers = {
     // prevents default FocusZone behavior, e.g., in ChatMessageBehavior, it prevents FocusZone from using arrow keys
@@ -175,67 +158,62 @@ class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageS
     preventDefault: event => {
       // preventDefault only if event coming from inside the message
       if (event.currentTarget !== event.target) {
-        event.preventDefault()
+        event.preventDefault();
       }
     },
 
     focus: event => {
       if (this.state.messageNode) {
-        this.state.messageNode.focus()
-        event.stopPropagation()
+        this.state.messageNode.focus();
+        event.stopPropagation();
       }
-    },
-  }
+    }
+  };
 
   handleFocus = (e: React.SyntheticEvent) => {
-    this.updateActionsMenuPosition()
+    this.updateActionsMenuPosition();
 
-    this.setState({ focused: true })
-    _.invoke(this.props, 'onFocus', e, this.props)
-  }
+    this.setState({ focused: true });
+    _.invoke(this.props, 'onFocus', e, this.props);
+  };
 
   handleBlur = (e: React.SyntheticEvent) => {
     // `this.state.focused` controls is focused the whole `ChatMessage` or any of its children. When we're navigating
     // with keyboard the focused element will be changed and there is no way to use `:focus` selector
-    const shouldPreserveFocusState = _.invoke(e, 'currentTarget.contains', (e as any).relatedTarget)
+    const shouldPreserveFocusState = _.invoke(e, 'currentTarget.contains', (e as any).relatedTarget);
 
-    this.setState({ focused: shouldPreserveFocusState })
-    _.invoke(this.props, 'onBlur', e, this.props)
-  }
+    this.setState({ focused: shouldPreserveFocusState });
+    _.invoke(this.props, 'onBlur', e, this.props);
+  };
 
   handleMouseEnter = (e: React.SyntheticEvent) => {
-    this.updateActionsMenuPosition()
-    _.invoke(this.props, 'onMouseEnter', e, this.props)
-  }
+    this.updateActionsMenuPosition();
+    _.invoke(this.props, 'onMouseEnter', e, this.props);
+  };
 
-  handleMessageRef = (node: HTMLElement) => this.setState({ messageNode: node })
+  handleMessageRef = (node: HTMLElement) => this.setState({ messageNode: node });
 
-  renderActionMenu(
-    actionMenu: ChatMessageProps['actionMenu'],
-    styles: ComponentSlotStylesResolved,
-  ) {
-    const { unstable_overflow: overflow, positionActionMenu } = this.props
-    const { messageNode } = this.state
+  renderActionMenu(actionMenu: ChatMessageProps['actionMenu'], styles: ComponentSlotStylesResolved) {
+    const { unstable_overflow: overflow, positionActionMenu } = this.props;
+    const { messageNode } = this.state;
 
     const actionMenuElement = Menu.create(actionMenu, {
       defaultProps: () => ({
         [IS_FOCUSABLE_ATTRIBUTE]: true,
         accessibility: menuAsToolbarBehavior,
         className: ChatMessage.slotClassNames.actionMenu,
-        styles: styles.actionMenu,
-      }),
-    })
+        styles: styles.actionMenu
+      })
+    });
 
     if (!actionMenuElement) {
-      return actionMenuElement
+      return actionMenuElement;
     }
 
-    const menuRect: DOMRect = (positionActionMenu &&
-      _.invoke(this.menuRef.current, 'getBoundingClientRect')) || {
-      height: 0,
-    }
-    const messageRect: DOMRect = (positionActionMenu &&
-      _.invoke(messageNode, 'getBoundingClientRect')) || { height: 0 }
+    const menuRect: DOMRect = (positionActionMenu && _.invoke(this.menuRef.current, 'getBoundingClientRect')) || {
+      height: 0
+    };
+    const messageRect: DOMRect = (positionActionMenu && _.invoke(messageNode, 'getBoundingClientRect')) || { height: 0 };
 
     return (
       <Popper
@@ -256,9 +234,9 @@ class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageS
               ...(overflow && {
                 boundariesElement: 'scrollParent',
                 escapeWithReference: true,
-                padding: { top: messageRect.height - menuRect.height },
-              }),
-            },
+                padding: { top: messageRect.height - menuRect.height }
+              })
+            }
           }
         }
         position="above"
@@ -266,73 +244,57 @@ class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageS
         targetRef={messageNode}
       >
         {({ scheduleUpdate }) => {
-          this.updateActionsMenuPosition = scheduleUpdate
+          this.updateActionsMenuPosition = scheduleUpdate;
 
-          return <Ref innerRef={this.menuRef}>{actionMenuElement}</Ref>
+          return <Ref innerRef={this.menuRef}>{actionMenuElement}</Ref>;
         }}
       </Popper>
-    )
+    );
   }
 
-  renderComponent({
-    ElementType,
-    classes,
-    accessibility,
-    unhandledProps,
-    styles,
-  }: RenderResultConfig<ChatMessageProps>) {
-    const {
-      actionMenu,
-      author,
-      badge,
-      badgePosition,
-      children,
-      content,
-      timestamp,
-      reactionGroup,
-      reactionGroupPosition,
-    } = this.props
-    const childrenPropExists = childrenExist(children)
-    const className = childrenPropExists ? cx(classes.root, classes.content) : classes.root
+  renderComponent({ ElementType, classes, accessibility, unhandledProps, styles }: RenderResultConfig<ChatMessageProps>) {
+    const { actionMenu, author, badge, badgePosition, children, content, timestamp, reactionGroup, reactionGroupPosition } = this.props;
+    const childrenPropExists = childrenExist(children);
+    const className = childrenPropExists ? cx(classes.root, classes.content) : classes.root;
     const badgeElement = Label.create(badge, {
       defaultProps: () => ({
         className: ChatMessage.slotClassNames.badge,
-        styles: styles.badge,
-      }),
-    })
+        styles: styles.badge
+      })
+    });
 
     const reactionGroupElement = Reaction.Group.create(reactionGroup, {
       defaultProps: () => ({
         className: ChatMessage.slotClassNames.reactionGroup,
-        styles: styles.reactionGroup,
-      }),
-    })
+        styles: styles.reactionGroup
+      })
+    });
 
-    const actionMenuElement = this.renderActionMenu(actionMenu, styles)
+    const actionMenuElement = this.renderActionMenu(actionMenu, styles);
 
     const authorElement = Text.create(author, {
       defaultProps: () => ({
         size: 'small',
         styles: styles.author,
-        className: ChatMessage.slotClassNames.author,
-      }),
-    })
+        className: ChatMessage.slotClassNames.author
+      })
+    });
 
     const timestampElement = Text.create(timestamp, {
       defaultProps: () => ({
         size: 'small',
         styles: styles.timestamp,
         timestamp: true,
-        className: ChatMessage.slotClassNames.timestamp,
-      }),
-    })
+        className: ChatMessage.slotClassNames.timestamp
+      })
+    });
 
     const messageContent = Box.create(content, {
       defaultProps: () => ({
         className: ChatMessage.slotClassNames.content,
-        styles: styles.content,
-      }),
-    })
+        styles: styles.content
+      })
+    });
 
     return (
       <Ref innerRef={this.handleMessageRef}>
@@ -362,21 +324,21 @@ class ChatMessage extends UIComponent<WithAsProp<ChatMessageProps>, ChatMessageS
           )}
         </ElementType>
       </Ref>
-    )
+    );
   }
 }
 
-ChatMessage.create = createShorthandFactory({ Component: ChatMessage, mappedProp: 'content' })
+ChatMessage.create = createShorthandFactory({ Component: ChatMessage, mappedProp: 'content' });
 ChatMessage.slotClassNames = {
   actionMenu: `${ChatMessage.className}__actions`,
   author: `${ChatMessage.className}__author`,
   timestamp: `${ChatMessage.className}__timestamp`,
   badge: `${ChatMessage.className}__badge`,
   content: `${ChatMessage.className}__content`,
-  reactionGroup: `${ChatMessage.className}__reactions`,
-}
+  reactionGroup: `${ChatMessage.className}__reactions`
+};
 
 /**
  * A ChatMessage represents a single message in chat.
  */
-export default withSafeTypeForAs<typeof ChatMessage, ChatMessageProps>(ChatMessage)
+export default withSafeTypeForAs<typeof ChatMessage, ChatMessageProps>(ChatMessage);
