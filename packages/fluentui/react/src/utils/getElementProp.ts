@@ -1,7 +1,7 @@
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 
 const getElementProp = (element, propName) => {
-  return _.get(element, `props.${propName}`)
-}
+  return _.get(element, `props.${propName}`);
+};
 
-export default getElementProp
+export default getElementProp;

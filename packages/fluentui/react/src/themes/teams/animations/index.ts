@@ -1,5 +1,5 @@
-import scaleAnimations from './scale'
-import fadeAnimations from './fade'
-import slideAnimations from './slide'
+import scaleAnimations from './scale';
+import fadeAnimations from './fade';
+import slideAnimations from './slide';
 
-export default { ...fadeAnimations, ...scaleAnimations, ...slideAnimations }
+export default { ...fadeAnimations, ...scaleAnimations, ...slideAnimations };

@@ -1,8 +1,8 @@
-import * as keyboardKey from 'keyboard-key'
+import * as keyboardKey from 'keyboard-key';
 
-import { IS_FOCUSABLE_ATTRIBUTE } from '../../attributes'
-import { Accessibility } from '../../types'
-import { FocusZoneTabbableElements, FocusZoneDirection } from '../../focusZone/types'
+import { IS_FOCUSABLE_ATTRIBUTE } from '../../attributes';
+import { Accessibility } from '../../types';
+import { FocusZoneTabbableElements, FocusZoneDirection } from '../../focusZone/types';
 
 /**
  * @description
@@ -20,27 +20,27 @@ const chatMessageBehavior: Accessibility = () => ({
   attributes: {
     root: {
       [IS_FOCUSABLE_ATTRIBUTE]: true,
-      tabIndex: -1,
-    },
+      tabIndex: -1
+    }
   },
   focusZone: {
     props: {
       handleTabKey: FocusZoneTabbableElements.all,
       isCircularNavigation: true,
-      direction: FocusZoneDirection.vertical,
-    },
+      direction: FocusZoneDirection.vertical
+    }
   },
   keyActions: {
     root: {
       // prevents default FocusZone behavior, in this case, prevents using arrow keys as navigation (we only want a Tab key to navigate)
       preventDefault: {
-        keyCombinations: [{ keyCode: keyboardKey.ArrowUp }, { keyCode: keyboardKey.ArrowDown }],
+        keyCombinations: [{ keyCode: keyboardKey.ArrowUp }, { keyCode: keyboardKey.ArrowDown }]
       },
       focus: {
-        keyCombinations: [{ keyCode: keyboardKey.Escape }],
-      },
-    },
-  },
-})
+        keyCombinations: [{ keyCode: keyboardKey.Escape }]
+      }
+    }
+  }
+});
 
-export default chatMessageBehavior
+export default chatMessageBehavior;
