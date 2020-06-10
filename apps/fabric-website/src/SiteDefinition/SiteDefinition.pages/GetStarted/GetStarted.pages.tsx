@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { INavPage, LoadingComponent } from '@uifabric/example-app-base/lib/index2';
+import { getStartedPagesWeb } from './web';
 
 export const GetStartedPages: INavPage = {
   title: 'Get started',
@@ -12,18 +13,7 @@ export const GetStartedPages: INavPage = {
       cb(require<any>('../../../pages/Overviews/GetStartedPage/GetStartedPage').GetStartedPage),
     ),
   platforms: {
-    web: [
-      {
-        title: 'Get started',
-        url: '#/get-started/web',
-        isHiddenFromMainNav: true,
-        component: () => <LoadingComponent title="Get started" />,
-        getComponent: cb =>
-          require.ensure([], require =>
-            cb(require<any>('../../../pages/Overviews/GetStartedPage/GetStartedPage').GetStartedPage),
-          ),
-      },
-    ],
+    web: getStartedPagesWeb,
     ios: [
       {
         title: 'Get started',
