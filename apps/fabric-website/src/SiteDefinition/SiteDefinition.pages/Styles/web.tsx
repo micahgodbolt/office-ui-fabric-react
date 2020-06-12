@@ -173,9 +173,4 @@ export const stylesPagesWeb: INavPage[] = [
         cb(require<any>('../../../pages/Styles/LocalizationPage/LocalizationPage').LocalizationPage),
       ),
   },
-  {
-    title: 'Theme Designer',
-    url: 'https://aka.ms/themedesigner',
-    isExternal: true,
-  },
 ];

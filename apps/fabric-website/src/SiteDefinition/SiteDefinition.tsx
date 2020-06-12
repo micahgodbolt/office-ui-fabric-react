@@ -41,6 +41,16 @@ export const SiteDefinition: ISiteDefinition<Platforms> = {
           cb(require<any>('../pages/PageTemplates/TemplatePage/TemplatePage').TemplatePage),
         ),
     },
+    {
+      title: 'Theme Designer',
+      url: '#/theming-designer',
+      isContentFullBleed: true,
+      component: () => <LoadingComponent title="Localization" />,
+      getComponent: cb =>
+        require.ensure([], require =>
+          cb(require<any>('../pages/Styles/ThemingDesignerPage/ThemingDesignerPage').ThemingDesignerPage),
+        ),
+    },
   ],
   redirects: [
     { from: '#/customizations/', to: '#/controls/web/customizations/' },
